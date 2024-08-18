@@ -5,6 +5,7 @@ import Image from "next/image";
 import Logo from "@/public/assets/images/logo_common.png";  
 import SearchList from "./searchList";  
 import Communicate from "./communicate";  
+import { IoSearch } from "react-icons/io5";
 import Menu from "./menu";  
 
 const Header = () => {  
@@ -52,23 +53,10 @@ const Header = () => {
               <input  
                 type="text"  
                 className="px-5 text-xl py-2 rounded-full w-full"  
-                placeholder="Search for scholarships"  
+                placeholder="Buscar por escolas"  
                 onClick={() => setMenu(SHOW_COMMUNICATE)} // You might want to consider onFocus instead of onClick  
               />  
-              <span className="absolute right-3 bg-purple-600 p-[7px] rounded-full">  
-                <svg  
-                  className="w-6 h-6 text-white"  
-                  aria-hidden="true"  
-                  xmlns="http://www.w3.org/2000/svg"  
-                >  
-                  <path  
-                    stroke="currentColor"  
-                    strokeLinecap="round"  
-                    strokeWidth="2"  
-                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"  
-                  />  
-                </svg>  
-              </span>  
+              <IoSearch size={24} className="absolute right-3" />
             </div>  
           </div>  
 

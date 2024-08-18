@@ -83,10 +83,10 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
           </Link>
           <button
             onClick={loginStatus ? toggleEvent:() => setToEnter(!toenter)}
-            className={`${loginStatus ? "flex rounded-full border bg-white px-1.5 items-center text-sm text-gray-500 space-x-1" 
-              : "px-4 py-2.5 rounded-full border border-white text-white hover:bg-violet-800"}`}
+            className={`${loginStatus ? "flex rounded-full bg-white px-1.5 items-center text-sm text-gray-500 space-x-1" 
+              : "px-4 py-2.5 rounded-full border border-purple-800 text-white hover:bg-violet-800"}`}
           >
-            <span>{loginStatus ? "H" : "Login"}</span>
+            <span>{loginStatus ? "H" : "Fazer Login"}</span>
           </button>
           {menuShow && <MenuTipCard />}
         </div>
@@ -144,7 +144,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
               </svg>
             </span>
             <div className="flex flex-col gap-1">
-              <span>Talk to us at</span>
+              <span>Fale conosco por:</span>
               <a href="#" className="text-orange-500">
                 WhatsApp
               </a>
@@ -189,7 +189,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
               setMenu(0);
             }}
           >
-            To Enter
+           Faça Login
           </button>
         )}
       </div>

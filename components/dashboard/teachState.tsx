@@ -48,7 +48,7 @@ const TeachStage: React.FC = () => {
 
         <div className="absolute flex flex-col justify-center bottom-0 lg:w-2/3 mx-5 w-lvw">
           <p className="font-semibold lg:self-start self-center px-4 lg:px-10 py-1 text-purple-500 text-center bg-white rounded-t-3xl">
-            Busca pela etapa de formação
+            Buscar pela etapa de formação
           </p>
           {
             levels.length > 0 &&
@@ -138,17 +138,21 @@ const TeachStage: React.FC = () => {
           }
         </div>
       </div>
-      <div className="lg:flex lg:justify-around items-end lg:w-2/3 grid w-lvw gap-5 p-5 shadow-custom rounded-b-lg z-10">
+      <div className="lg:flex lg:justify-around items-end lg:w-2/3 grid w-lvw gap-5 p-5 
+      border-b-[1px] border-l-[1px] border-r-[1px] rounded-b-lg z-10"
+      >
         <div className="flex flex-col gap-1">
-          <label htmlFor="">Escolha uma cidade:</label>
+          <label className="font-light" htmlFor="">Escolha uma cidade:</label>
           <SearchCity disp={2} filters={filters} setFilters={setFilters} />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="">Série que deseja estudar:</label>
+          <label className="font-light" htmlFor="">Série que deseja estudar:</label>
           <SearchSeries disp={2} filters={filters} setFilters={setFilters} />
         </div>
-        <Link href={`/escola/busca/${filters && encodeURIComponent(JSON.stringify(filters)) }`} className="rounded-lg bg-purple-500 px-5 py-2 text-white text-center">
-          Buscr bolsas
+        <Link 
+        href={`/escola/busca/${filters && encodeURIComponent(JSON.stringify(filters)) }`} 
+        className="rounded-lg bg-purple-500 px-5 py-2 text-white text-center">
+          Buscar bolsas
         </Link>
       </div>
     </div >

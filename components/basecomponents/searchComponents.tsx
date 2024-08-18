@@ -39,6 +39,7 @@ const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, set
           throw new Error('Network response was not ok');
         }
         const data = await res.json();
+        console.log(data)
         setCities(data);
       } catch (err) {
         console.error('Error: Level loading error!!!');

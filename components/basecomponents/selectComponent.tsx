@@ -71,7 +71,7 @@ const CustomSelect = <T,>({ className, items, value, setItem, renderItem }: Cust
         onChange={handleInputChange}  
         onFocus={() => setDropdownVisible(true)} // Show dropdown when focused  
         className={`${className && className} py-2 rounded-full w-full max-w-xs focus:outline-none`}
-        placeholder="Select an item"  
+        placeholder="Selecione um Item"  
       />  
 
       {isDropdownVisible && (  
@@ -87,7 +87,7 @@ const CustomSelect = <T,>({ className, items, value, setItem, renderItem }: Cust
               </li>  
             ))  
           ) : (  
-            <li className="px-5 py-2 text-gray-500">No matches found</li>  
+            <li className="px-5 py-2 font-light text-xs text-gray-500">nenhum resultado encontrado</li>  
           )}  
         </ul>  
       )}  

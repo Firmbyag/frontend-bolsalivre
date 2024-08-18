@@ -4,7 +4,7 @@ import Logo from "@/public/assets/images/logo_common.png";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col bg-[#3e3b60] px-6 md:px-24 space-y-8 md:space-y-28 py-8 text-white">
+    <div className="flex flex-col bg-[#3e3b60] px-6 md:px-24 space-y-8 md:space-y-28 py-10 text-white">
       <div className="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0 md:space-x-12 ">
         <div className="flex flex-col space-y-5">
           <span className="font-semibold text-lg"> Encontre Bolsas</span>

@@ -73,7 +73,7 @@ const SearchList: React.FC<SearchListProps> = ({ menu, setMenu }) => {
                 />  
               </svg>  
             </span>  
-            <p className="text-xl font-bold">Search for a school</p>  
+            <p className="text-xl font-bold">Buscar por uma escola:</p>  
 
             <SearchCity disp={1} className="flex flex-col gap-1 mx-8" filters={filters} setFilters={setFilters} />  
             <Neighborhood disp={1} className="flex flex-col gap-1 mx-8" filters={filters} setFilters={setFilters} />  

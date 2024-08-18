@@ -21,7 +21,7 @@ const PopularSchools = [
     star: 5,
     title: "Intergenius College",
     city: {city: "Joinville - SC"},
-    neigh: {neigh: "Juliao Ramos"},
+    neigh: {neigh: "Julião Ramos"},
     scholarUnit: "BRL",
     amount: "306.57",
   },
@@ -118,7 +118,8 @@ export default function RootLayout() {
               {PopularSchools.map((school: any, index: number) => (
                 <div
                   key={index}
-                  className="bg-white max-w-sm p-4 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
+                  className="bg-white max-w-sm p-4 border border-gray-200 rounded-lg
+                   dark:bg-gray-800 dark:border-gray-700"
                 >
                   <PrivateSchoolCard
                     key={index}

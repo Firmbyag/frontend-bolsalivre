@@ -146,7 +146,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 xl:w-[80vw] lg:w-[90vw] max-w-screen-xl px-3 pb-5">
               {
                 !schools && (
-                  <div className="flex col-span-2 justify-center items-center">Loading...</div>
+                  <div className="flex col-span-2 justify-center items-center">Carregando...</div>
                 )
               }
               {schools && schools.map((result: any, index: number) => (

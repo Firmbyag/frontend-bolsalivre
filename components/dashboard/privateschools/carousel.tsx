@@ -57,7 +57,7 @@ const CarouselComponent: React.FC<privateSchoolsDataProps> = ({
     <div className="flex justify-center lg:p-[10px]">
       {
         schoolsData.length === 0 && (
-          <div className="justify-center">Loading....</div>
+          <div className="justify-center">Carregando....</div>
         )
       }
       {schoolsData.length > 0 &&
