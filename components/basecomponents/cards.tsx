@@ -641,7 +641,7 @@ const MenuTipCard: React.FC = () => {
           removeFromLocalStorage("token");
           removeUserRole("role");
           window.location.href = "/";
-          toast.success("Successfully logged out....");
+          toast.success("Logout feito com sucesso");
         }}
         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
       >

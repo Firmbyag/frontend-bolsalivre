@@ -244,7 +244,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
 
       if (success) {
         toast.success(
-          `Successfully ${formSwitch ? "Added" : "Updated"} School ....`
+          `Sucesso ao ${formSwitch ? "Adicionar" : "Atualizar"} Escola ....`
         );
         setSchoolTitle("");
         setChangeLevel("");
@@ -252,10 +252,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
           setFormSwitch(true);
         }, 1000);
       } else {
-        toast.warning("Try again ...");
+        toast.warning("Tente novamente ...");
       }
     } catch (error: any) {
-      toast.error(`Confirm fields value: , ${error}`);
+      toast.error(`Confirme os valores dos campos: , ${error}`);
     }
   };
 
@@ -270,7 +270,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
         onClick={onClose}
       ></div>
       <div className="bg-white p-6 rounded-lg shadow-lg z-10 w-11/12 md:w-1/2 lg:w-1/3 overflow-y-auto max-h-[90vh]">
-        <div className="relative flex justify-center items-center">
+        <p>Preencha as informações para cadastrar</p>
+        <hr />
+        <div className="relative flex justify-center items-center my-4">
           <div className="flex justify-center items-center">
             {school && school.title && !imagePreview && (
               <SchoolImage title={school.title} />
@@ -300,7 +302,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
 
         <div className="grid grid-cols-2 p-1 gap-3">
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Escola
             </label>
             <input
@@ -317,7 +319,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
 
           <div className="mb-5 col-span-2 grid grid-cols-2 gap-2">
             <div className="flex flex-col">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
                 Cidade:
               </label>
               <CustomSelect
@@ -330,7 +332,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
                 Bairro:
               </label>
               <CustomSelect
@@ -344,7 +346,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             </div>
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Escolaridade
             </label>
             <CustomSelect
@@ -357,7 +359,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             />
           </div>
           <div className="mb-5 col-span-2 grap-2">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Mensalidade sem desconto:
             </label>
             <CustomSelect
@@ -371,7 +373,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
           </div>
         </div>
         <div className="mb-5 col-span-2">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
             Ano letivo:
           </label>
           <MultiOption
@@ -382,7 +384,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
         </div>
         <div className="grid grid-cols-2 p-1 gap-3">
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-600">
               Mensalidade sem desconto:
             </label>
             <div className="relative">
@@ -414,7 +416,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Desconto na mensalidade %
             </label>
             <div className="relative">
@@ -440,13 +442,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               />
             </div>
             {!isValidMonthlyState && (
-              <p className="mt-2 text-sm text-red-600" id="email-error">
-                Please enter a valid.
+              <p className="mt-2 text-xs font-light text-red-600" id="email-error">
+                digite um valor válido.
               </p>
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-600">
               Mensalidade com desconto:
             </label>
             <input
@@ -458,7 +460,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Valor da matricula
             </label>
             <div className="relative">
@@ -490,7 +492,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Vagas:
             </label>
             <input
@@ -503,7 +505,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Tipo de colégio:
             </label>
             <select
@@ -517,7 +519,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             </select>
           </div>
           <div className="mb-5 col-span-2">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Horário:
             </label>
             <MultiOption
@@ -528,7 +530,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
           </div>
 
           <div className="mb-5 col-span-2">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
               Informações adicionais
             </label>
             <textarea
@@ -541,17 +543,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
         </div>
 
         <div className="flex gap-5 justify-end">
+
           <button
-            className="bg-purple-500 justify-end text-white px-4 py-2  rounded-full hover:bg-purple-600"
-            onClick={SaveAndEdit}
-          >
-            Salvar
-          </button>
-          <button
-            className="bg-purple-500 justify-end text-white px-4 py-2  rounded-full hover:bg-purple-600"
+            className=" text-xs bg-white border border-purple-500 justify-end text-purple px-4 py-2  rounded-full hover:bg-purple-600 hover:text-white"
             onClick={onClose}
           >
             Cancelar
+          </button>
+          <button
+            className="text-xs bg-purple-500 justify-end text-white px-4 py-2  rounded-full hover:bg-purple-600"
+            onClick={SaveAndEdit}
+          >
+            Salvar
           </button>
         </div>
       </div>

@@ -83,15 +83,15 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
         const { token, role, _id } = await login(data).unwrap();
         if (token) {
           dispatch(setCredentials({ token }));
-          toast.success("Loginned exactly");
+          toast.success("Login efetuado com sucesso");
           setUserRole(role);
           setUserId(_id);
           setShow(!isShow);
         } else {
-          toast.error("Unregistered Email!");
+          toast.error("E-mail não cadastrado!");
         }
       } catch (error) {
-        toast.error("Failed to login: ", error);
+        toast.error("Falha ao fazer login: ", error);
       }
     }
   };

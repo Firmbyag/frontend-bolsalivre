@@ -31,7 +31,7 @@ const seriesSlice = createSlice({
       state.user = decoded;
       state.token = action.payload.token;
       state.status = "succeeded";
-      toast.success("Successfully logged in....")
+      toast.success("Login efetuado com sucesso")
     },
     clearCredentials: (state) => {
       state.token = null;
