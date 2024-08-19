@@ -21,7 +21,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
   };
   return (
     <>
-      <div className="bg-white md:flex-row sm:flex-col flex justify-between items-center border-b px-4 py-1 md:px-24 sticky top-0 z-30">
+      <div className="bg-white md:flex-row sm:flex-col flex justify-between items-center border-b p-3 md:px-24 sticky top-0 z-30">
         <div className="flex justify-between w-full md:w-auto sm:h-auto">
           <Link href="/">
             <Image
@@ -60,7 +60,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
             <li className={`${activeTab === 1 && 'bg-slate-300 rounded-full'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Panel do Gestor")}`}
-                className="flex text-orange-500 justify-between items-center hover:rounded-full hover:bg-gray-300 p-3 md:text-[15px] sm:text[12px]"
+                className="flex justify-between items-center hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
               >
                 <span>Painel do Gestor</span>
               </Link>
@@ -68,7 +68,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
             <li className={`${activeTab === 2 && 'bg-slate-300 rounded-full'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Minha Escola")}`}
-                className="flex text-orange-500 justify-between items-center  hover:rounded-full hover:bg-gray-300 p-3 md:text-[15px] sm:text-[12px]"
+                className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
               >
                 <span>Minha Escola</span>
               </Link>
@@ -76,7 +76,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
             <li className={`${activeTab === 3 && 'bg-slate-300 rounded-full'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Minhas Ofertas")}`}
-                className="flex text-orange-500 justify-between items-center  hover:rounded-full hover:bg-gray-300 p-3 md:text-[15px] sm:text-[12px]"
+                className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
               >
                 <span>Minhas Ofertas</span>
               </Link>
@@ -84,7 +84,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
             <li className={`${activeTab === 4 && 'bg-slate-300 rounded-full'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Meus Alunos")}`}
-                className="flex text-orange-500 justify-between items-center  hover:rounded-full hover:bg-gray-300 p-3 md:text-[15px] sm:text-[12px]"
+                className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
               >
                 <span>Meus Alunos</span>
               </Link>
@@ -92,13 +92,13 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
             <li className={`${activeTab === 5 && 'bg-slate-300 rounded-full'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Servios")}`}
-                className="flex text-orange-500 justify-between items-center  hover:rounded-full hover:bg-gray-300 p-3 md:text-[15px] sm:text-[12px]"
+                className="flex justify-between items-center hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
               >
-                <span>Servios</span>
+                <span>Serviços</span>
               </Link>
             </li>
-            <li className="">
-              <div className="flex justify-between items-center text-sm border rounded-lg p-1 border-gray-500 text-gray-500 space-x-1">
+            <li className="ml-6">
+              <div className="flex justify-between items-center text-sm rounded-lg p-1 text-gray-500 space-x-1">
                 <svg
                   className=""
                   xmlns="http://www.w3.org/2000/svg"
@@ -118,8 +118,8 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                   />
                 </svg>
                 <button  className="flex flex-col text-xs" onClick={() => {toggleEvent()}}>
-                  <span> Teste 01 </span>
-                  <span className="text-orange-500"> Dados de conta </span>
+                  <span> Nome de usuário </span>
+                  <span className="text-[10px] font-light"> Dados de conta </span>
                 </button>
                 {menuShow && 
                     <div className="origin-top-right absolute right-24 mt-[85px] text-center w-32 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
@@ -131,7 +131,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                         }}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Sair
+                       🏃‍♂️ Sair
                       </a>
                     </div>
                 }

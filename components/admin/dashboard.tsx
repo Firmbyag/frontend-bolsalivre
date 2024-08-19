@@ -25,27 +25,27 @@ const PanelBoard: React.FC<Title> = ({ title }) => {
       </div>
       <div className="w-full md:w-full space-y-10">
         <div className="flex flex-col bg-white border p-5 rounded-xl gap-3">
-          <p className="text-2xl md:text-3xl text-gray-700 font-bold">
-            Bem-vindo, Escola Teste
+          <p className="text-2xl md:text-2xl text-gray-900 font-bold">
+            Bem-vindo, Escola [nome da escola]
           </p>
-          <p className="text-gray-400">
+          <p className="text-gray-400 text-xs">
             Aqui você pode gerenciar o desempenho da página de sua escola,
             conhecer as estratégias de seus concorrentes e aumentar a captação
             de alunos.
           </p>
         </div>
-        <div className="flex flex-col bg-orange-400 border p-5 rounded-xl gap-3">
-          <p className="text-2xl md:text-3xl text-gray-700 font-bold">
-            PARTICIPE JA
+        <div className="flex flex-col border-2 border-slate-300 p-5 rounded-xl gap-3">
+          <p className="text-2xl md:text-lg text-gray-900 font-bold">
+           Participe já
           </p>
-          <p className="text-gray-400 pb-5 border-b">
-            Participe da major campanha de captacao de alunos para 2023.
+          <p className="text-gray-400 pb-5 border-b text-xs">
+            Participe da maior campanha de captacao de alunos para 2023.
           </p>
-          <p>
-            clique no botao abaixo e inscreva-se! <br />
+          <p className="text-xs font-light">
+            clique no botão abaixo e inscreva-se! <br />
             Cidade: <strong> Capixaba </strong>
           </p>
-          <span className="bg-white text-orange-600 px-5 py-2 rounded-full">
+          <span className=" bg-orange-600 text-white px-5 py-2 rounded-full w-fit">
             Clique aqui
           </span>
         </div>
@@ -58,7 +58,7 @@ const EscolaBoard: React.FC<Title> = ({ title }) => {
 
   return (
     <div className="flex sm:flex-col md:flex-row md:px-24 py-10 space-y-10 md:space-y-0">
-      <div className="flex flex-col md:w-[360px] w-full space-y-3">
+      {/* <div className="flex flex-col md:w-[360px] w-full space-y-3">
         <p className="text-gray-800 font-semibold text-lg">{title}</p>
         <button className="hover:text-gray-800 hover:bg-slate-300 hover:rounded-full flex justify-center items-center py-2 text-orange-500">
           Editar dados da escola
@@ -66,7 +66,7 @@ const EscolaBoard: React.FC<Title> = ({ title }) => {
         <button className="hover:text-gray-800 hover:bg-slate-300 hover:rounded-full flex justify-center items-center py-2 text-orange-500">
           Ver no Melhor Escola
         </button>
-      </div>
+      </div> */}
       <div className="flex flex-col w-full space-y-10">
         <Minhaescola />
       </div>

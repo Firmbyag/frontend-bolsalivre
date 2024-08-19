@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { AlunosBoard, EscolaBoard, OfertasBoard, PanelBoard, ServiceBoard } from '@/components/admin/dashboard';
 import Header from "@/components/admin/header";
-import Footer from "@/components/maisAlunos/footer/page";
+// import Footer from "@/components/maisAlunos/footer/page";
 import "@/app/globals.css";
 import { getUserRole } from '@/utils/localstorage';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import Footer from '@/components/footer/page';
 // import { useRouter } from 'next/router';
 
 const Page = (url: any) => {
@@ -55,7 +56,8 @@ const Page = (url: any) => {
             <div className="flex flex-col bg-gray-200">
                 {showDashboard}
             </div>
-            <Footer />
+            <Footer/>
+            {/* <Footer /> */}
         </>
     )
 }
