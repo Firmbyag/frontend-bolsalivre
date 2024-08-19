@@ -5,6 +5,7 @@ import { isEmpty } from '@/utils/is-empty';
 // Define a generic type for the items and a display function for rendering them  
 interface CustomSelectProps<T> {  
   className?: string;
+  filterName: string;
   items: T[];  
   value?: T;
   setItem: (item: T) => void;  
@@ -12,7 +13,7 @@ interface CustomSelectProps<T> {
   renderItem?: (item: T) => string;  
 }  
 
-const CustomSelect = <T,>({ className, items, value, setItem, renderItem }: CustomSelectProps<T>) => {  
+const CustomSelect = <T,>({ className, filterName, items, value, setItem, renderItem }: CustomSelectProps<T>) => {  
   const [inputValue, setInputValue] = useState<string>('');  
   const [isDropdownVisible, setDropdownVisible] = useState<boolean>(false);  
   const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a reference for the component  
@@ -71,7 +72,7 @@ const CustomSelect = <T,>({ className, items, value, setItem, renderItem }: Cust
         onChange={handleInputChange}  
         onFocus={() => setDropdownVisible(true)} // Show dropdown when focused  
         className={`${className && className} py-2 rounded-full w-full max-w-xs focus:outline-none`}
-        placeholder="Selecione um Item"  
+        placeholder={`Filtrar por ${filterName}`}
       />  
 
       {isDropdownVisible && (  

@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
 import "swiper/scss/pagination";
 import { PrivateSchoolCard } from "../../basecomponents/cards";
+import { Spinner } from "@material-tailwind/react";
 
 interface Level {
   _id: string;
@@ -38,9 +39,7 @@ const CarouselComponent: React.FC<privateSchoolsDataProps> = ({
       ? Object.values(privateSchoolsData)
       : [];
   const slide = schoolsData.map((school: any, index: number) => (
-    <SwiperSlide
-      key={index}
-    >
+    <SwiperSlide key={index}>
       <PrivateSchoolCard
         key={index}
         star={school.star}
@@ -55,12 +54,12 @@ const CarouselComponent: React.FC<privateSchoolsDataProps> = ({
   ));
   return (
     <div className="flex justify-center lg:p-[10px]">
-      {
-        schoolsData.length === 0 && (
-          <div className="justify-center">Carregando....</div>
-        )
-      }
-      {schoolsData.length > 0 &&
+      {schoolsData.length === 0 && (
+        <div className="justify-center">
+          Carregando...
+        </div>
+      )}
+      {schoolsData.length > 0 && (
         <Swiper
           slidesPerView={1} // Initially show 1 slide on small screens
           spaceBetween={10}
@@ -75,11 +74,10 @@ const CarouselComponent: React.FC<privateSchoolsDataProps> = ({
             1024: {
               slidesPerView: 4, // 4 slides for screens >= 1024px
             },
-          }}>
+          }}
+        >
           {schoolsData.map((school: any, index: number) => (
-            <SwiperSlide
-              key={index}
-            >
+            <SwiperSlide key={index}>
               <PrivateSchoolCard
                 key={index}
                 star={school.star}
@@ -93,7 +91,7 @@ const CarouselComponent: React.FC<privateSchoolsDataProps> = ({
             </SwiperSlide>
           ))}
         </Swiper>
-      }
+      )}
     </div>
   );
 };

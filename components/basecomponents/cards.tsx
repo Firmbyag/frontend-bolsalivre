@@ -10,6 +10,7 @@ import {
 } from "@/utils/localstorage";
 import Link from "next/link";
 import SchoolImage from "./schoolImage";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const stars = [0, 0, 0, 0, 0];
 
@@ -239,7 +240,7 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
     );
   }
   return (
-    <div className="flex flex-col bg-white rounded-lg justify-between items-between gap-5">
+    <div className="flex flex-col bg-white rounded-lg justify-between items-between gap-2">
       <div className="flex gap-5 items-center">
         {/* <Image
           src={`data:${mark && mark.contentType};base64,${mark && mark.data.toString('base64')}`}
@@ -249,15 +250,17 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
           className="w-10 h-10 rounded-full ring-2 "
         /> */}
         <SchoolImage title={title} />
-        <p className="text-based font-semibold text-sm text-gray-700">
-          {title}
-        </p>
-      </div>
-      <div className="flex gap-1">
-        {stars.map((s: any, index: number) => (
-          <Star key={index} flag={index < star ? true : false} />
-        ))}
-        <span>{star}</span>
+        <div className="flex-col">
+          <p className="text-based font-semibold text-sm text-gray-700">
+            {title}
+          </p>
+          <div className="flex gap-1 items-center">
+            {stars.map((s: any, index: number) => (
+              <Star key={index} flag={index < star ? true : false} />
+            ))}
+            <span className="text-xs font-light text-orange-700">{star}.0</span>
+          </div>
+        </div>
       </div>
       <div className="flex flex-col gap-2 text-gray-400">
         <p className="text-gray-700 text-sm">{period}</p>
@@ -265,14 +268,15 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
         <p className="text-sm">{neigh}</p>
       </div>
       <hr className="p-2" />
-      <div className="flex flex-col text-sm">
-        <p>School year</p>
-        <span className="flex justify-start">{schoolYearArray}</span>
-        <p>turno</p>
-        <span className="flex flex-wrap justify-start">{turnoArray}</span>
-        {/* <span className="flex justify-start">
-          {turnoArray}
-        </span> */}
+      <div className="flex flex-row gap-6">
+        <div className="flex-col">
+          <p className="text-xs">ano letivo:</p>
+          <span className="flex justify-start">{schoolYearArray}</span>
+        </div>
+        <div className="flex-col">
+          <p className="text-xs">turno:</p>
+          <span className="flex flex-wrap justify-start">{turnoArray}</span>
+        </div>
       </div>
       <div className="flex justify-between items-center">
         <p className="pb-0 text-gray-400 line-through decoration-gray-500">
@@ -285,17 +289,18 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
         </p>
       </div>
       <div className="flex flex-col justify-between">
-        <span>Level</span>
-        <span>{level}</span>
+        <span className="text-xs text-gray-600">ensino:</span>
+        <span className="text-xs">{level}</span>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
         <Link
           // type="button"
           href={`/escola/${encodeURIComponent(title)}`}
-          className="text-white py-2 bg-orange-500 hover:bg-orange-600 focus:outline-double focus:ring-4 focus:ring-purple-500 font-medium rounded-full text-sm px-5 text-center me-2"
+          className="relative text-white py-2 bg-orange-500 hover:bg-orange-600 focus:outline-double focus:ring-4 focus:ring-purple-500 font-medium rounded-full text-sm px-5 text-center me-2"
         >
-          See Scholarship
+          Ver Bolsa
+          <FaMagnifyingGlass className="absolute text-white right-4 top-3" />
         </Link>
       </div>
     </div>

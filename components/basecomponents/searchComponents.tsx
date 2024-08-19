@@ -62,6 +62,7 @@ const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, set
             <CustomSelect
               items={cities}
               className="px-5"
+              filterName="cidade"
               setItem={setSelectedCity}
               renderItem={renderItem}
             />
@@ -106,6 +107,7 @@ const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, set
             <CustomSelect
               items={cities}
               setItem={setSelectedCity}
+              filterName="cidade"
               renderItem={renderItem}
               className="px-5"
             />
@@ -192,6 +194,7 @@ const Neighborhood: React.FC<SearchButtonProps> = ({ disp, className, filters, s
             <CustomSelect
               items={neighs}
               className="px-5"
+              filterName="bairro"
               setItem={setSelectedNeigh}
               renderItem={renderItem}
             />
@@ -225,6 +228,7 @@ const Neighborhood: React.FC<SearchButtonProps> = ({ disp, className, filters, s
             <CustomSelect
               className="px-10"
               items={neighs}
+              filterName="bairro"
               setItem={setSelectedNeigh}
               renderItem={renderItem}
             />
@@ -312,6 +316,7 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
             <CustomSelect
               items={schools}
               className="px-5"
+              filterName="escolas"
               setItem={setSelectedSchool}
               renderItem={renderItem}
             />
@@ -340,12 +345,13 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
         <>
           <div className="flex flex-col">
             <label htmlFor="" className="font-semibold text-sm">
-              School:
+              Escola:
             </label>
             <div className="flex pt-1.5 items-center relative rounded-full">
               <CustomSelect
                 className="px-10"
                 items={schools}
+                filterName="escola"
                 setItem={setSelectedSchool}
                 renderItem={renderItem}
               />
@@ -420,10 +426,11 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
     <div className={`${className} relative`} >
       {disp === 0 ? (
         <>
-          <div className="flex gap-1 items-center justify-center">
+          <div className="flex gap-1 items-center">
             <CustomSelect
               items={sereiesList}
               setItem={setSelectedSeries}
+              filterName="série"
               renderItem={renderItem}
               className="px-5"
             />
@@ -471,7 +478,7 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
           {
             disp === 1 && (
               <label htmlFor="" className="font-semibold text-sm">
-                Series:
+                Série:
               </label>
             )
           }
@@ -479,6 +486,7 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
             <CustomSelect
               className="px-10"
               items={sereiesList}
+              filterName="série"
               setItem={setSelectedSeries}
               renderItem={renderItem}
             />
@@ -560,10 +568,11 @@ const TeachingState: React.FC<SearchButtonProps> = ({
         <CustomSelect
           items={levels}
           setItem={setselectedLevel}
+          filterName="etapa"
           className="px-5"
           renderItem={renderItem}
         />
-        <span className="absolute left-2">
+        {/* <span className="absolute right-4 text-gray-800">
           <svg
             className="w-6 h-6 text-slate-500 dark:text-white"
             aria-hidden="true"
@@ -581,7 +590,7 @@ const TeachingState: React.FC<SearchButtonProps> = ({
               d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             />
           </svg>
-        </span>
+        </span> */}
       </div>
     </div>
   )
@@ -603,9 +612,9 @@ const SearchRadius: React.FC<SearchButtonProps> = ({
       {disp === 1 ?
         <>
           <label htmlFor="" className="font-semibold text-sm" >
-            Search radius
+            Raio de busca
           </label>
-          <p>Up to {radiusValue} km</p>
+          <p>até {radiusValue} km</p>
           <input
             type="range"
             onChange={(e) => { setRadiusValue(e.target.value); handleFilters(); }}
@@ -682,7 +691,7 @@ const SearchChecked: React.FC<SearchButtonProps> = ({ disp, className, checkedLa
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             onChange={(e) => handleFilters(e.target.value, selectedData, setSelectedData)}
           />
-          <label htmlFor={`default-checkbox${i}-${disp - 1}`} className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+          <label htmlFor={`default-checkbox${i}-${disp - 1}`} className="ms-2 text-sm font-light text-gray-900 dark:text-gray-800">
             {element.year || element.turno}
           </label>
         </div>
