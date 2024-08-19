@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             <Link href="/blog">
               <span className="text-xs">Blog Gestores</span>
             </Link>
-            <Link href="">
+            <Link href="/admin/Panel%20do%20Gestor">
               <span className="text-xs">Área do Gestor</span>
             </Link>
           </div>

@@ -1,12 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AlunosBoard, EscolaBoard, OfertasBoard, PanelBoard, ServiceBoard } from '@/components/admin/dashboard';
 import Header from "@/components/admin/header";
 import Footer from "@/components/maisAlunos/footer/page";
 import "@/app/globals.css";
+import { getUserRole } from '@/utils/localstorage';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+// import { useRouter } from 'next/router';
 
 const Page = (url: any) => {
+    const router = useRouter();
+
     const decode_url = decodeURIComponent(url.params.url);
     let activeTab = 0;
     let showDashboard;
@@ -32,6 +38,17 @@ const Page = (url: any) => {
             showDashboard = <ServiceBoard title={decode_url} key={1} />;
             break;
     }
+
+    useEffect(() => {
+        let userRole = getUserRole();
+        if(userRole === 'customer') {
+            toast.error('Usuário não autorizado');
+            router.push('/')
+        }
+    }, [])
+
+
+
     return (
         <>
             <Header activeTab={activeTab} />

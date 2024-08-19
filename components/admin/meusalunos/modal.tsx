@@ -96,16 +96,16 @@ const Modal: React.FC<ModalProps> = ({ newData, setShowModal }) => {
             <div className="bg-black w-full h-full opacity-50" onClick={() => setShowModal(false)}></div>
             <div className="absolute flex flex-col gap-5 border border-slate-300 rounded-lg p-5 bg-white">
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="">Name</label>
+                    <label htmlFor="">Nome</label>
                     <input type="text" className="rounded-full px-5 py-1 border border-slate-300 focus:outline-none focus:ring focus:ring-purple-300" value={data && data.name} onChange={(e) => { setData({ ...data, name: e.target.value }) }} />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="">School</label>
+                    <label htmlFor="">Escola</label>
                     <select
                         className="border border-slate-400 focus:outline-none focus:ring focus:ring-purple-400 px-5 py-1 rounded-full"
                         name="" id="" defaultValue={schools && schools.length > 0 && schools[0]._id} value={data && data.school && data.school} 
                         onChange={(e) => {setData({...data, school: e.target.value})}}>
-                        <option value="">Select School</option>
+                        <option value="">Escolha uma escola</option>
                         {
                             schools && schools.map((school: any, index: number) => (
                                 <option key={index} value={school._id}>
@@ -121,12 +121,12 @@ const Modal: React.FC<ModalProps> = ({ newData, setShowModal }) => {
                     </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="">Parent</label>
+                    <label htmlFor="">Pais</label>
                     <select
                         className="border border-slate-400 focus:outline-none focus:ring focus:ring-purple-400 px-5 py-1 rounded-full"
                         name="" id="" defaultValue={users && users.length > 0 && users[0]._id} value={data && data.parent && data.parent}
                         onChange={(e) => {setData({...data, parent: e.target.value})}}>
-                        <option value="">Select Parent</option>
+                        <option value="">Selecione os pais</option>
                         {
                             users && users.map((user: any, index: number) => (
                                 <option key={index} value={user._id}>{user.name}</option>
@@ -135,12 +135,12 @@ const Modal: React.FC<ModalProps> = ({ newData, setShowModal }) => {
                     </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="">Year</label>
+                    <label htmlFor="">Ano</label>
                     <select
                         className="border border-slate-400 focus:outline-none focus:ring focus:ring-purple-400 px-5 py-1 rounded-full"
                         name="" id="" defaultValue={years && years.length > 0 && years[0].year} value={data && data.year && data.year}
                         onChange={(e) => {setData({...data, year: e.target.value})}}>
-                        <option value="">Select Year</option>
+                        <option value="">Selecione o ano</option>
                         {
                             years && years.length > 0 &&
                             years.map((year: any, index: number) => (
@@ -156,7 +156,7 @@ const Modal: React.FC<ModalProps> = ({ newData, setShowModal }) => {
                         name="" id="" defaultValue={tipos && tipos.length > 0 && tipos[0].
                             _id} value={data && data.tipo && data.tipo}
                             onChange={(e) => {setData({...data, tipo: e.target.value})}}>
-                        <option value="">Select Tipo</option>
+                        <option value="">Selecione Tipo</option>
                         {
                             tipos && tipos.length > 0 &&
                             tipos.map((tipo: any, index: number) => (
@@ -167,7 +167,7 @@ const Modal: React.FC<ModalProps> = ({ newData, setShowModal }) => {
                 </div>
 
                 <button className="bg-purple-500 py-2 text-white text-xl font-semibold rounded-full" onClick={() => registStudent()}>
-                    Register
+                    Cadastrar
                 </button>
             </div>
         </div>
