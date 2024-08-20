@@ -8,9 +8,9 @@ import {
   removeFromLocalStorage,
   removeUserRole,
 } from "@/utils/localstorage";
-import Link from "next/link";
 import SchoolImage from "./schoolImage";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import Link from "next/link";
 
 const stars = [0, 0, 0, 0, 0];
 

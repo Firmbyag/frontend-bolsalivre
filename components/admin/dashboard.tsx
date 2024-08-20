@@ -8,6 +8,7 @@ import "swiper/scss/pagination";
 import Minhasofertas from "./minhasofertas/page";
 import Minhaescola from "./minhaescola/page";
 import Meusalunos from "./meusalunos/page";
+import Link from "next/link";
 interface Title {
   title: string;
 }
@@ -17,7 +18,7 @@ const PanelBoard: React.FC<Title> = ({ title }) => {
 
   return (
     <div className="flex flex-col md:flex-row md:px-24 py-10 md:space-x-10 sm:space-y-10">
-      <div className="flex flex-col md:w-[360px] w-full space-y-3">
+      {/* <div className="flex flex-col md:w-[360px] w-full space-y-3">
         <p className="text-gray-800 font-semibold text-lg">{title}</p>
         <p
           onClick={() => setTab(1)}
@@ -25,11 +26,11 @@ const PanelBoard: React.FC<Title> = ({ title }) => {
         >
           <span className="items-center">Dados do Mercado</span>
         </p>
-      </div>
+      </div> */}
       <div className="w-full md:w-full space-y-10">
         <div className="flex flex-col bg-white border p-5 rounded-xl gap-3">
           <p className="text-2xl md:text-2xl text-gray-900 font-bold">
-            Bem-vindo, Escola [nome da escola]
+            Bem vindo, parceiro.
           </p>
           <p className="text-gray-400 text-xs">
             Aqui você pode gerenciar o desempenho da página de sua escola,
@@ -37,20 +38,19 @@ const PanelBoard: React.FC<Title> = ({ title }) => {
             de alunos.
           </p>
         </div>
-        <div className="flex flex-col border-2 border-slate-300 p-5 rounded-xl gap-3">
+        <div className="flex flex-col bg-white border p-5 rounded-xl gap-3">
           <p className="text-2xl md:text-lg text-gray-900 font-bold">
-            Participe já
+            Matrícula Antecipada 2025
           </p>
           <p className="text-gray-400 pb-5 border-b text-xs">
-            Participe da maior campanha de captacao de alunos para 2023.
+            Cadastre agora suas vagas e garanta o melhor benefício como parceiro
           </p>
-          <p className="text-xs font-light">
-            clique no botão abaixo e inscreva-se! <br />
-            Cidade: <strong> Capixaba </strong>
-          </p>
-          <span className=" bg-orange-600 text-white px-5 py-2 rounded-full w-fit">
-            Clique aqui
-          </span>
+          <Link
+            href={`/admin/${encodeURIComponent("Minhas Ofertas")}`}
+            className=" bg-orange-600 text-white px-5 py-2 rounded-full w-fit"
+          >
+            Garantir
+          </Link>
         </div>
       </div>
     </div>
@@ -82,7 +82,6 @@ const OfertasBoard: React.FC<Title> = ({ title }) => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  console.log(isModalOpen);
 
   return (
     <div className="flex flex-col md:px-24 rounded-xl py-10 gap-3">
@@ -135,20 +134,24 @@ const AlunosBoard: React.FC<Title> = ({ title }) => {
     <div className="flex flex-col md:px-24 rounded-xl py-10 gap-3">
       <div className="flex flex-col justify-between space-y-10 py-10 px-5 rounded-xl">
         <div className="flex flex-col border-b justify-start p-5 rounded-lg space-y-1 bg-white">
-          <strong className="text-gray-800 font-semibold text-2xl">
-            {title}
-          </strong>
-          <label className="flex py-2 pb-2 text-gray-500">
-            Aqui voce tem acesso a toda base de alunos e suas informacoes, como
-            dados, comprovantes, status e entre outros. Utilize o filtro para
-            facilitar a sua busca
-          </label>
-          <button
-            className="rounded-full bg-purple-400 text-white px-5 py-2"
-            onClick={() => setShowModal(true)}
-          >
-            Register
-          </button>
+          <div className="flex-row justify-between">
+            <div className="flex-col">
+              <strong className="text-gray-800 font-semibold text-2xl">
+                {title}
+              </strong>
+              <label className="flex py-2 pb-2 text-gray-500 text-xs">
+                Aqui voce tem acesso a toda base de alunos e suas informacoes,
+                como dados, comprovantes, status e entre outros. Utilize o
+                filtro para facilitar a sua busca
+              </label>
+            </div>
+            <button
+              className="rounded-full bg-orange-600 text-white px-5 py-2 text-xs"
+              onClick={() => setShowModal(true)}
+            >
+              Cadastrar
+            </button>
+          </div>
         </div>
         <Meusalunos showModal={showModal} setShowModal={setShowModal} />
       </div>

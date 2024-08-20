@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import Providers from "./StoreProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import LayoutProviders from "@/components/providers";
 
 const poppins = Poppins({
   subsets: ["latin", "latin-ext"],
@@ -25,8 +26,8 @@ export default function RootLayout({
     <Providers>
       <html lang="pt-br">
         <body className={poppins.className}>
-          {children}
-          <ToastContainer
+          <LayoutProviders>{children}</LayoutProviders>
+          {/* <ToastContainer
             position="bottom-right"
             autoClose={5000}
             hideProgressBar={false}
@@ -37,7 +38,7 @@ export default function RootLayout({
             draggable
             pauseOnHover
             theme="colored"
-          />
+          /> */}
         </body>
       </html>
     </Providers>

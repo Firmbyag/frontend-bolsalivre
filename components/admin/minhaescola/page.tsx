@@ -1,9 +1,13 @@
 "use client";
 
+import CustomSelect from "@/components/basecomponents/selectComponent";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { IoDocumentText, IoLocationSharp } from "react-icons/io5";
 import { MdAddAPhoto } from "react-icons/md";
 import ReactImageUploading from "react-images-uploading";
+import { maskBr } from "js-brasil";
+import { toast } from "react-toastify";
 
 const Minhaescola: React.FC = () => {
   const [sobre, setSobre] = useState<boolean>(false);
@@ -12,12 +16,70 @@ const Minhaescola: React.FC = () => {
   const [images, setImages] = useState([]);
   const [contato, setContato] = useState<boolean>(false);
   const [documentos, setDocumentos] = useState<boolean>(false);
+  const [ensino, setEnsino] = useState<string[]>([
+    "Ensino Básico",
+    "Ensino Técnico",
+    "Ensino Superior",
+  ]);
+
+  const setEnsinoValue = (item: any) => {
+    item && item._id && setEnsino(item._id);
+  };
+
+  const { register, watch, handleSubmit } = useForm();
+  
+  const fetchSchool = async () => {
+   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/schools-details`)
+   const data = await response.json()
+   console.log(data)
+  }
+
+  const postSchoolInfo = async (schoolData) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/schools-details/add`,
+        {
+          method: "POST",
+          body: JSON.stringify(schoolData),
+        }
+      );
+      const data = await response.json();
+      toast.success(data.success);
+    } catch (error) {
+      toast.error("Erro ao salvar escola");
+    }
+  };
+
+  const onSubmitSchool = (data) => {
+    console.log(data);
+    postSchoolInfo(data);
+  };
+  const onSubmitAddress = (data) => {
+    console.log(data);
+    postSchoolInfo(data);
+  };
+
+  const onSubmitMedia = (data) => {};
+
+  const onSubmitContact = (data) => {
+    console.log(data);
+    postSchoolInfo(data);
+  };
+
+  const onSubmitDocuments = (data) => {
+    console.log(data);
+    postSchoolInfo(data);
+  };
 
   const onChangeImages = (imageList: any, addUpdateIndex: any) => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
+
+  useEffect(() => {
+    fetchSchool()
+  }, [])
 
   return (
     <div className="flex flex-col gap-5">
@@ -93,7 +155,7 @@ const Minhaescola: React.FC = () => {
             !sobre && "hidden"
           } flex flex-col transition-all translate-x-7`}
         >
-          <div className="flex-col">
+          <form className="flex-col" onSubmit={handleSubmit(onSubmitSchool)}>
             <div className="flex-col my-4">
               <label className="text-xs" htmlFor="">
                 Nome da escola
@@ -101,15 +163,18 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="nome exemplo"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolName")}
               />
             </div>
             <div className="flex-col my-4">
               <label className="text-xs" htmlFor="">
-                Nome da escola
+                Grau de ensino
               </label>
-              <input
-                placeholder="nome exemplo"
-                className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+              <CustomSelect
+                items={ensino}
+                setItem={setEnsinoValue}
+                filterName="Ensino"
+                {...register("schoolgrade")}
               />
             </div>
             <div className="flex-col my-4">
@@ -119,6 +184,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="razão social da escola"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolSocialReason")}
               />
             </div>
             <div className="flex-col my-4">
@@ -128,6 +194,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="xx.xxxxx.xxxx.xxx.xx"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolCNPJ")}
               />
             </div>
             <div className="flex-col my-4">
@@ -137,6 +204,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="nome do responsável legal"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolResponsibleName")}
               />
             </div>
             <div className="flex-col my-4">
@@ -146,6 +214,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="cpf do responsável legal"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolResponsibleCPF")}
               />
             </div>
             <div className="flex-col my-4">
@@ -155,6 +224,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="carg do responsável legal"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolResponsibleRole")}
               />
             </div>
             <div className="flex-col my-4">
@@ -164,6 +234,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="email do responsável legal"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolResponsibleEmail")}
               />
             </div>
             <div className="flex-col my-4">
@@ -173,6 +244,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="celular do responsável legal"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolResponsiblePhone")}
               />
             </div>
             <div className="flex-col my-4">
@@ -182,9 +254,16 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="nome completo da secretária principal"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolSecretaryName")}
               />
             </div>
-          </div>
+            <button
+              className="bg-orange-600 p-3 w-40 text-xs rounded-full text-white"
+              type="submit"
+            >
+              Salvar
+            </button>
+          </form>
         </div>
       </div>
       <div className="flex flex-col gap-5 border bg-slate-50 p-12 rounded-lg">
@@ -239,7 +318,10 @@ const Minhaescola: React.FC = () => {
           } flex flex-col transition-all translate-x-7`}
         >
           <span>Preencha as informações de endereço do seu colégio</span>
-          <div className="flex-col gap-4">
+          <form
+            className="flex-col gap-4"
+            onSubmit={handleSubmit(onSubmitAddress)}
+          >
             <div className="flex-col my-4">
               <label className="text-xs" htmlFor="">
                 CEP
@@ -247,6 +329,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="digite seu CEP"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolCEP")}
               />
             </div>
             <div className="flex-col my-4">
@@ -256,6 +339,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="digite seu logradouro"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolStreet")}
               />
             </div>
             <div className="flex-col my-4">
@@ -265,6 +349,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="digite o número do seu endereço"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolNumber")}
               />
             </div>
             <div className="flex-col my-4">
@@ -274,6 +359,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="ex: bloco, próxima ao, etc"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolComplement")}
               />
             </div>
             <div className="flex-col my-4">
@@ -283,6 +369,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="digite seu bairro"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolNeighborhood")}
               />
             </div>
             <div className="flex-col my-4">
@@ -292,6 +379,7 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="digite sua cidade"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolCity")}
               />
             </div>
             <div className="flex-col my-4">
@@ -301,9 +389,16 @@ const Minhaescola: React.FC = () => {
               <input
                 placeholder="digite seu estado"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolState")}
               />
             </div>
-          </div>
+            <button
+              className="bg-orange-600 p-3 w-40 text-xs rounded-full text-white"
+              type="submit"
+            >
+              Salvar
+            </button>
+          </form>
         </div>
       </div>
       <div className="flex flex-col gap-5 border bg-slate-50 p-12 rounded-lg">
@@ -493,20 +588,30 @@ const Minhaescola: React.FC = () => {
           <span>
             Informe seu telefone de contato para eventuais emergências
           </span>
-          <div className="flex-col my-2">
-            <label htmlFor="">Telefone</label>
-            <input
-              placeholder="(xx) xxxxx-xxxx"
-              className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-          <div className="flex-col my-2">
-            <label htmlFor="">Celular</label>
-            <input
-              placeholder="(xx) xxxxx-xxxx"
-              className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
+          <form onSubmit={handleSubmit(onSubmitContact)}>
+            <div className="flex-col my-2">
+              <label htmlFor="">Telefone</label>
+              <input
+                placeholder="(xx) xxxxx-xxxx"
+                className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolPhone")}
+              />
+            </div>
+            <div className="flex-col my-2">
+              <label htmlFor="">Celular</label>
+              <input
+                placeholder="(xx) xxxxx-xxxx"
+                className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+                {...register("schoolCellphone")}
+              />
+            </div>
+            <button
+              className="bg-orange-600 p-3 w-40 text-xs rounded-full text-white"
+              type="submit"
+            >
+              Salvar
+            </button>
+          </form>
         </div>
       </div>
       <div className="flex flex-col gap-5 border bg-slate-50 p-12 rounded-lg">
@@ -567,27 +672,41 @@ const Minhaescola: React.FC = () => {
             Gestor Escolar, por favor, Informe a documentação exigida pela sua
             instituição de ensino para efetuar a matrícula:
           </span>
-          <div className="flex-col my-2">
-            <label className="text-xs" htmlFor="">Informe documento 1 (caso haja)</label>
-            <input
-              placeholder="nome do documento"
-              className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-          <div className="flex-col my-2">
-            <label className="text-xs" htmlFor="">Informe documento 2 (caso haja)</label>
-            <input
-              placeholder="nome do documento"
-              className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-          <div className="flex-col my-2">
-            <label className="text-xs" htmlFor="">Informe documento 3 (caso haja)</label>
-            <input
-              placeholder="nome do documento"
-              className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
+          <form onSubmit={handleSubmit(onSubmitDocuments)}>
+            <div className="flex-col my-2">
+              <label className="text-xs" htmlFor="">
+                Informe documento 1 (caso haja)
+              </label>
+              <input
+                placeholder="nome do documento"
+                className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            <div className="flex-col my-2">
+              <label className="text-xs" htmlFor="">
+                Informe documento 2 (caso haja)
+              </label>
+              <input
+                placeholder="nome do documento"
+                className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            <div className="flex-col my-2">
+              <label className="text-xs" htmlFor="">
+                Informe documento 3 (caso haja)
+              </label>
+              <input
+                placeholder="nome do documento"
+                className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            <button
+              className="bg-orange-600 p-3 w-40 text-xs rounded-full text-white"
+              type="submit"
+            >
+              Salvar
+            </button>
+          </form>
         </div>
       </div>
     </div>

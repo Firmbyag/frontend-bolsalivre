@@ -57,7 +57,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
         </div>
         <div className="hidden md:flex md:flex-row justify-between items-center">
           <ul className="flex justify-between items-center space-x-1">
-            <li className={`${activeTab === 1 && 'bg-slate-300 rounded-full'}`}>
+            <li className={`${activeTab === 1 && 'text-orange-600 font-semibold'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Panel do Gestor")}`}
                 className="flex justify-between items-center hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -65,7 +65,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Painel do Gestor</span>
               </Link>
             </li>
-            <li className={`${activeTab === 2 && 'bg-slate-300 rounded-full'}`}>
+            <li className={`${activeTab === 2 && 'text-orange-600 font-semibold'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Minha Escola")}`}
                 className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -73,7 +73,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Minha Escola</span>
               </Link>
             </li>
-            <li className={`${activeTab === 3 && 'bg-slate-300 rounded-full'}`}>
+            <li className={`${activeTab === 3 && 'text-orange-600 font-semibold'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Minhas Ofertas")}`}
                 className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -81,7 +81,7 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Minhas Ofertas</span>
               </Link>
             </li>
-            <li className={`${activeTab === 4 && 'bg-slate-300 rounded-full'}`}>
+            <li className={`${activeTab === 4 && 'text-orange-600 font-semibold'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Meus Alunos")}`}
                 className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -89,14 +89,14 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Meus Alunos</span>
               </Link>
             </li>
-            <li className={`${activeTab === 5 && 'bg-slate-300 rounded-full'}`}>
+            {/* <li className={`${activeTab === 5 && 'text-orange-600 font-semibold'}`}>
               <Link
                 href={`/admin/${encodeURIComponent("Servios")}`}
                 className="flex justify-between items-center hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
               >
                 <span>Serviços</span>
               </Link>
-            </li>
+            </li> */}
             <li className="ml-6">
               <div className="flex justify-between items-center text-sm rounded-lg p-1 text-gray-500 space-x-1">
                 <svg

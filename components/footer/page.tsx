@@ -3,7 +3,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 const Footer: React.FC = () => {
   return (
-    <div className="flex flex-col gap-10 mt-10 bg-purple-600 text-white">
+    <div className="flex flex-col gap-10 bg-purple-600 text-white">
       <div className="lg:flex lg:justify-around lg:gap-5 lg:px-40 px-10 py-5">
         <div className="flex flex-col gap-2 my-4">
           <p className="text-lg font-semibold">Parceiros</p>

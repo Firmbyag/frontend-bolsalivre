@@ -91,12 +91,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
           `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/levels`
         );
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Error de conexão com a rede");
         }
         const data = await res.json();
         setLevels(data);
       } catch (err) {
-        console.error("Error: Level loading error!!!");
+        console.error("Error: Falha no carregamento");
       }
     };
 
@@ -106,12 +106,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
           `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/cities`
         );
         if (!res.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Error de conexão com a rede");
         }
         const data = await res.json();
         setCities(data);
       } catch (err) {
-        console.error("Error: Level loading error!!!");
+        console.error("Error: Falha no carregamento");
       }
     };
 
@@ -277,7 +277,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
             {school && school.title && !imagePreview && (
               <SchoolImage title={school.title} />
             )}
-            <label
+            {/* <label
               htmlFor="mark"
               className="flex w-20 h-20 rounded-full cursor-pointer bg-slate-400 border border-spacing-4 border-purple-700 justify-center items-center"
             >
@@ -296,7 +296,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               id="mark"
               className="hidden"
               onChange={changeImage}
-            />
+            /> */}
           </div>
         </div>
 
@@ -410,8 +410,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               />
             </div>
             {!isValidMonthly && (
-              <p className="mt-2 text-sm text-red-600" id="email-error">
-                Please enter a valid.
+              <p className="mt-2 text-xs font-light text-red-600" id="email-error">
+               digite uma informação válida.
               </p>
             )}
           </div>
@@ -442,7 +442,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               />
             </div>
             {!isValidMonthlyState && (
-              <p className="mt-2 text-xs font-light text-red-600" id="email-error">
+              <p
+                className="mt-2 text-xs font-light text-red-600"
+                id="email-error"
+              >
                 digite um valor válido.
               </p>
             )}
@@ -543,7 +546,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
         </div>
 
         <div className="flex gap-5 justify-end">
-
           <button
             className=" text-xs bg-white border border-purple-500 justify-end text-purple px-4 py-2  rounded-full hover:bg-purple-600 hover:text-white"
             onClick={onClose}

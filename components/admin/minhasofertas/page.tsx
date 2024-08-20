@@ -90,31 +90,31 @@ const Minhasofertas: React.FC<MinhasofertasProps> = ({
                 type="checkbox"
               />
             </th>
-            <th key={2} className="border-r border-slate-300 border-b px-4">
+            <th key={2} className="border-slate-300 border-b px-4">
               <span>Etapa</span>
             </th>
-            <th key={3} className="border-r border-slate-300 border-b px-4">
+            <th key={3} className="border-slate-300 border-b px-4">
               <span>Série</span>
             </th>
-            <th key={4} className="border-r border-slate-300 border-b px-4">
+            <th key={4} className="border-slate-300 border-b px-4">
               <span>Turno</span>
             </th>
-            <th key={5} className="border-r border-slate-300 border-b px-4">
+            <th key={5} className="border-slate-300 border-b px-4">
               <span>Mens.s/desconto</span>
             </th>
-            <th key={6} className="border-r border-slate-300 border-b px-4">
+            <th key={6} className="border-slate-300 border-b px-4">
               <span>Desconto na Mens.</span>
             </th>
-            <th key={7} className="border-r border-slate-300 border-b px-4">
+            <th key={7} className="border-slate-300 border-b px-4">
               <span>Valor da matrícula</span>
             </th>
-            <th key={8} className="border-r border-slate-300 border-b px-4">
+            <th key={8} className="border-slate-300 border-b px-4">
               <span>Vagas</span>
             </th>
-            <th key={9} className="border-r border-slate-300 border-b px-4">
+            <th key={9} className="border-slate-300 border-b px-4">
               <span>Info. adicional</span>
             </th>
-            <th key={10} className="border-r border-slate-300 border-b px-4">
+            <th key={10} className="border-slate-300 border-b px-4">
               <span>Opções</span>
             </th>
           </tr>
@@ -209,7 +209,7 @@ const Minhasofertas: React.FC<MinhasofertasProps> = ({
             ))
           ) : (
             <tr>
-              <td colSpan={10}>Nenhuma escola encontrada.</td>
+              <td className="font-light text-xs" colSpan={15}>nenhum escola encontrada.</td>
             </tr>
           )}
         </tbody>
