@@ -17,42 +17,46 @@ interface SearchButtonProps {
   checkedLabel?: string;
   filters?: any;
   setFilters?: any;
-};
+}
 
-const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, setFilters }) => {
+const SearchCity: React.FC<SearchButtonProps> = ({
+  disp,
+  className,
+  filters,
+  setFilters,
+}) => {
   const [city, setCity] = useState<string>();
   const [cities, setCities] = useState<any[]>([]);
 
   const setSelectedCity = (city: any) => {
     city && city._id && setCity(city._id);
-  }
+  };
 
   const renderItem = (item: any) => {
     return item.city;
-  }
+  };
 
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/cities`);
+        const res = await fetch(`http://localhost:5000/api/cities`);
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        console.log(data)
+        console.log(data);
         setCities(data);
       } catch (err) {
-        console.error('Error: Level loading error!!!');
+        console.error("Error: Level loading error!!!");
       }
-    }
+    };
 
     fetchCities();
-  }, [])
+  }, []);
 
   useEffect(() => {
     setFilters && setFilters({ ...filters, city: city });
   }, [city]);
-
 
   return (
     <div className={`${className}`}>
@@ -65,10 +69,11 @@ const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, set
               filterName="cidade"
               setItem={setSelectedCity}
               renderItem={renderItem}
+              placeholder="Filtrar por cidade..."
             />
             <span className="absolute left-1">
               <svg
-                className="w-5 h-5 text-slate-600 dark:text-white"
+                className="w-5 h-5 text-slate-600"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -96,13 +101,11 @@ const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, set
         </>
       ) : (
         <>
-          {
-            disp === 1 && (
-              <label htmlFor="" className="font-semibold text-lg">
-                City:
-              </label>
-            )
-          }
+          {disp === 1 && (
+            <label htmlFor="" className="font-semibold text-lg">
+              City:
+            </label>
+          )}
           <div className="flex items-center relative rounded-full border">
             <CustomSelect
               items={cities}
@@ -111,76 +114,78 @@ const SearchCity: React.FC<SearchButtonProps> = ({ disp, className, filters, set
               renderItem={renderItem}
               className="px-5"
             />
-            {
-              disp === 1 && (
-
-                <span className="absolute left-2">
-                  <svg
-                    className="w-5 h-5 text-slate-600 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                    />
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
-                    />
-                  </svg>
-                </span>
-              )
-            }
+            {disp === 1 && (
+              <span className="absolute left-2">
+                <svg
+                  className="w-5 h-5 text-slate-600 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                  />
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"
+                  />
+                </svg>
+              </span>
+            )}
           </div>
         </>
       )}
-
     </div>
   );
 };
 
-const Neighborhood: React.FC<SearchButtonProps> = ({ disp, className, filters, setFilters }) => {
+const Neighborhood: React.FC<SearchButtonProps> = ({
+  disp,
+  className,
+  filters,
+  setFilters,
+}) => {
   const [neigh, setNeigh] = useState<string>();
   const [neighs, setNeighs] = useState<any[]>();
 
   const setSelectedNeigh = (neigh: any) => {
     neigh && neigh._id && setNeigh(neigh._id);
-  }
+  };
 
   const renderItem = (item: any) => {
     return item.neigh;
-  }
+  };
 
   useEffect(() => {
     const fetchNeighs = async () => {
-      const url = filters && filters.city && !isEmpty(filters.city) ?
-        `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/neighs?cityId=${filters.city}`
-        : `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/neighs`
+      const url =
+        filters && filters.city && !isEmpty(filters.city)
+          ? `http://localhost:5000/api/neighs?cityId=${filters.city}`
+          : `http://localhost:5000/api/neighs`;
 
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await res.json();
         setNeighs(data);
       } catch (err) {
-        console.error('Error: Neigh loading error!!!');
+        console.error("Error: Neigh loading error!!!");
       }
-    }
+    };
     fetchNeighs();
-  }, [filters && filters.city && filters.city])
+  }, [filters && filters.city && filters.city]);
 
   useEffect(() => {
     setFilters && setFilters({ ...filters, neigh: neigh });
@@ -190,17 +195,18 @@ const Neighborhood: React.FC<SearchButtonProps> = ({ disp, className, filters, s
     <div className={`${className} relative`}>
       {disp === 0 ? (
         <>
-          <div className="flex gap-1 items-center px-2">
+          <div className="flex gap-1 items-center">
             <CustomSelect
               items={neighs}
               className="px-5"
               filterName="bairro"
               setItem={setSelectedNeigh}
               renderItem={renderItem}
+              placeholder="Filtrar por bairro..."
             />
             <span className="absolute left-1">
               <svg
-                className="w-6 h-6 text-slate-500 dark:text-white"
+                className="w-6 h-6 text-slate-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -269,11 +275,11 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
 
   const setSelectedSchool = (school: any) => {
     school && school._id && setSchool(school._id);
-  }
+  };
 
   const renderItem = (item: any) => {
     return item.title;
-  }
+  };
 
   useEffect(() => {
     const fetchSchools = async () => {
@@ -285,20 +291,20 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
         body = JSON.stringify({ city: filters.city });
       }
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/schools`, {
-          method: 'get',
+        const res = await fetch(`http://localhost:5000/api/schools`, {
+          method: "get",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(body),
         });
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await res.json();
         setSchools(data);
       } catch (err) {
-        console.error('Error: School loading error!!!');
+        console.error("Error: School loading error!!!");
       }
     };
     fetchSchools();
@@ -309,7 +315,7 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
   }, [school]);
 
   return (
-    <div className={`${className} relative`} >
+    <div className={`${className} relative`}>
       {disp === 0 ? (
         <>
           <div className="flex gap-1 items-center">
@@ -357,7 +363,7 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
               />
               <span className="absolute left-2">
                 <svg
-                  className="w-6 h-6 text-slate-500 dark:text-white"
+                  className="w-6 h-6 text-slate-500"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -389,29 +395,34 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
   setFilters,
 }) => {
   const [sereiesList, setSeriesList] = useState<any>();
-  const [series, setSeries] = useState<string | any>('');
+  const [series, setSeries] = useState<string | any>("");
 
   const setSelectedSeries = (series: any) => {
     series && series._id && setSeries(series._id);
-  }
+  };
 
   const renderItem = (item: any) => {
     return item.series;
-  }
+  };
 
   useEffect(() => {
     const fetchSeries = async () => {
       const level = filters && filters.level;
       const school = filters && filters.school;
-      const url = school ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series?schoolId=${school}` : level ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series?levelId=${level}` : `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series`;
+      const url = school
+        ? `http://localhost:5000/api/series?schoolId=${school}`
+        : level
+        ? `http://localhost:5000/api/series?levelId=${level}`
+        : `http://localhost:5000/api/series`;
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          throw new Error('Network response was not ok');
-        } const data = await res.json();
+          throw new Error("Network response was not ok");
+        }
+        const data = await res.json();
         setSeriesList(data);
       } catch (err) {
-        console.error('Error: Level loading error!!!');
+        console.error("Error: Level loading error!!!");
       }
     };
     fetchSeries();
@@ -423,7 +434,7 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
   }, [series]);
 
   return (
-    <div className={`${className} relative`} >
+    <div className={`${className} relative`}>
       {disp === 0 ? (
         <>
           <div className="flex gap-1 items-center">
@@ -433,10 +444,11 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
               filterName="série"
               renderItem={renderItem}
               className="px-5"
+              placeholder="Filtrar por cidade..."
             />
             <span className="absolute left-1">
               <svg
-                className="w-6 h-6 text-slate-500 dark:text-white"
+                className="w-6 h-6 text-slate-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -490,34 +502,30 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
               setItem={setSelectedSeries}
               renderItem={renderItem}
             />
-            {
-              disp === 1 && (
-
-                <span className="absolute left-2">
-                  <svg
-                    className="w-6 h-6 text-slate-500 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="square"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                    />
-                  </svg>
-                </span>
-              )
-            }
+            {disp === 1 && (
+              <span className="absolute left-2">
+                <svg
+                  className="w-6 h-6 text-slate-500 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="square"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </span>
+            )}
           </div>
         </>
       )}
-
     </div>
   );
 };
@@ -533,23 +541,23 @@ const TeachingState: React.FC<SearchButtonProps> = ({
 
   const setselectedLevel = (level: any) => {
     level && level._id && setLevel(level._id);
-  }
+  };
 
   const renderItem = (item: any) => {
     return item.level;
-  }
+  };
 
   useEffect(() => {
     const fetchLevels = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/levels`);
+        const res = await fetch(`http://localhost:5000/api/levels`);
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await res.json();
         setLevels(data);
       } catch (err) {
-        console.error('Error: Level loading error!!!');
+        console.error("Error: Level loading error!!!");
       }
     };
     fetchLevels();
@@ -557,7 +565,7 @@ const TeachingState: React.FC<SearchButtonProps> = ({
 
   useEffect(() => {
     setFilters({ ...filters, level: level });
-  }, [level])
+  }, [level]);
 
   return (
     <div className={`${className} relative`}>
@@ -593,7 +601,7 @@ const TeachingState: React.FC<SearchButtonProps> = ({
         </span> */}
       </div>
     </div>
-  )
+  );
 };
 
 const SearchRadius: React.FC<SearchButtonProps> = ({
@@ -606,10 +614,10 @@ const SearchRadius: React.FC<SearchButtonProps> = ({
 
   const handleFilters = () => {
     setFilters({ ...filters, radius: radiusValue });
-  }
+  };
   return (
     <div className={`${className} relative`}>
-      {disp === 1 ?
+      {disp === 1 ? (
         <>
           <label htmlFor="" className="font-semibold text-sm" >
             Raio de busca
@@ -617,24 +625,39 @@ const SearchRadius: React.FC<SearchButtonProps> = ({
           <p>até {radiusValue} km</p>
           <input
             type="range"
-            onChange={(e) => { setRadiusValue(e.target.value); handleFilters(); }}
+            onChange={(e) => {
+              setRadiusValue(e.target.value);
+              handleFilters();
+            }}
             value={radiusValue}
             id="currency-input"
             className="w-full h-2 bg-gray-200 rounded-lg cursor-pointer dark:bg-gray-700 accent-indigo-600"
-            placeholder="Enter amount" />
-        </> :
-        ''
-      }
+            placeholder="Enter amount"
+          />
+        </>
+      ) : (
+        ""
+      )}
     </div>
-  )
+  );
 };
 
-const SearchChecked: React.FC<SearchButtonProps> = ({ disp, className, checkedLabel, filters, setFilters }) => {
+const SearchChecked: React.FC<SearchButtonProps> = ({
+  disp,
+  className,
+  checkedLabel,
+  filters,
+  setFilters,
+}) => {
   const [selectedData, setSelectedData] = useState<string[]>([]);
   const [dataList, setDataList] = useState<any>([]);
   const checkedDisp: JSX.Element[] = [];
 
-  const handleFilters = (value: string, buffer: string[], setAction: React.Dispatch<React.SetStateAction<string[]>>) => {
+  const handleFilters = (
+    value: string,
+    buffer: string[],
+    setAction: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
     if (buffer.includes(value)) {
       setAction(buffer.filter((val) => val !== value));
     } else {
@@ -655,27 +678,27 @@ const SearchChecked: React.FC<SearchButtonProps> = ({ disp, className, checkedLa
   useEffect(() => {
     let url;
     if (disp === 1) {
-      url = `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/periodo`;
+      url = `http://localhost:5000/api/periodo`;
     } else if (disp === 2) {
-      url = `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/turno`;
+      url = `http://localhost:5000/api/turno`;
     } else {
-      url = `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/benefits`;
+      url = `http://localhost:5000/api/benefits`;
     }
 
     const fetchData = async () => {
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        setDataList(data)
+        setDataList(data);
       } catch (err) {
-        console.error('Error: Level loading error!!!');
+        console.error("Error: Level loading error!!!");
       }
-    }
+    };
     fetchData();
-  }, [])
+  }, []);
 
   const length = dataList.length;
   for (let i = 0; i < length; i++) {
@@ -689,9 +712,14 @@ const SearchChecked: React.FC<SearchButtonProps> = ({ disp, className, checkedLa
             type="checkbox"
             value={element._id}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            onChange={(e) => handleFilters(e.target.value, selectedData, setSelectedData)}
+            onChange={(e) =>
+              handleFilters(e.target.value, selectedData, setSelectedData)
+            }
           />
-          <label htmlFor={`default-checkbox${i}-${disp - 1}`} className="ms-2 text-sm font-light text-gray-900 dark:text-gray-800">
+          <label
+            htmlFor={`default-checkbox${i}-${disp - 1}`}
+            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
             {element.year || element.turno}
           </label>
         </div>
@@ -704,14 +732,33 @@ const SearchChecked: React.FC<SearchButtonProps> = ({ disp, className, checkedLa
             type="checkbox"
             value={element}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            onChange={(e) => handleFilters(e.target.value, selectedData, setSelectedData)}
+            onChange={(e) =>
+              handleFilters(e.target.value, selectedData, setSelectedData)
+            }
           />
-          <label htmlFor={`default-checkbox${i}-${disp - 1}`} className="flex justify-between ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+          <label
+            htmlFor={`default-checkbox${i}-${disp - 1}`}
+            className="flex justify-between ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
             {element}
           </label>
           <a className="pl-3 flex text-purple-700 hover:bg-purple-50">
-            <svg className="w-[24px] h-[24px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            <svg
+              className="w-[24px] h-[24px] text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
             </svg>
           </a>
         </div>
@@ -727,4 +774,12 @@ const SearchChecked: React.FC<SearchButtonProps> = ({ disp, className, checkedLa
   );
 };
 
-export { SearchCity, Neighborhood, SearchSchool, SearchSeries, TeachingState, SearchRadius, SearchChecked };
+export {
+  SearchCity,
+  Neighborhood,
+  SearchSchool,
+  SearchSeries,
+  TeachingState,
+  SearchRadius,
+  SearchChecked,
+};

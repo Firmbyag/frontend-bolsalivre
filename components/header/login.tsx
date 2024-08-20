@@ -104,7 +104,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
     >
       <div className="absolute w-screen h-screen bg-slate-700 opacity-80"></div>
       <div className="flex flex-col gap-4 mb-6 md:grid md:grid-cols-2 bg-white rounded-md p-5 z-50 max-w-lg md:max-w-2xl mx-4 md:mx-0">
-          <IoCloseCircle size={18} color="gray" onClick={() => setShow(false)}/>
+        <IoCloseCircle size={18} color="gray" onClick={() => setShow(false)} />
         {!statuss ? (
           <>
             <div className="col-span-2">
@@ -122,7 +122,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
                 <input
                   type="text"
                   aria-describedby="filled_success_help"
-                  className="block text-sm text-gray-600 rounded-full px-16 py-2 w-full force:text-gray-900 bg-gray-50 border focus:outline-purple-500 border-slate-500 appearance-none peer"
+                  className="block text-sm text-gray-600 rounded-full px-16 py-2 w-full focus:text-gray-900 bg-gray-50 border focus:outline-purple-500 border-slate-500 appearance-none peer"
                   placeholder="Digite seu nome completo"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -170,7 +170,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
                 />
               </div>
             </div>
-            <div className="col-span-2">
+            {/*<div className="col-span-2">
               <div>
                 <label
                   htmlFor="filled_success"
@@ -196,7 +196,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
                     ))}
                 </select>
               </div>
-            </div>
+            </div> */}
           </>
         ) : (
           <div className="col-span-2">
@@ -215,7 +215,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
                 type="text"
                 aria-describedby="filled_success_help"
                 className="block text-sm text-gray-600 rounded-full px-16 py-2 w-full force:text-gray-900 bg-gray-50 border focus:outline-purple-500 border-slate-500 appearance-none peer"
-                placeholder="Digite seu nome E-mail ou CPF"
+                placeholder="Digite seu E-mail ou CPF"
                 value={loginInput}
                 onChange={(e) => setLogin(e.target.value)}
                 onBlur={() => setLoginVal(true)}
@@ -241,6 +241,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
                 aria-describedby="filled_success_help"
                 className="block text-sm rounded-full px-16 py-2 w-full text-gray-900 bg-gray-50 border focus:outline-purple-500 border-slate-500 appearance-none peer"
                 placeholder="Digite sua senha"
+                maxLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onBlur={() => setPasswordVal(true)}
@@ -263,7 +264,7 @@ const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
             setStatus(!statuss);
           }}
         >
-         {!statuss ? "Faça o Login" : "Criar conta"}
+          {!statuss ? "Faça o Login" : "Criar conta"}
         </button>
       </div>
     </div>

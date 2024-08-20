@@ -278,6 +278,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               <SchoolImage title={school.title} />
             )}
             {/* <label
+            <label
               htmlFor="mark"
               className="flex w-20 h-20 rounded-full cursor-pointer bg-slate-400 border border-spacing-4 border-purple-700 justify-center items-center"
             >

@@ -25,21 +25,23 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
 
   useEffect(() => {
     try {
-      setSearchParam({
-        ...searchParam,
-        ...JSON.parse(param),
-      });
+      if (param && typeof param === "string") {
+        setSearchParam({
+          ...searchParam,
+          ...JSON.parse(param),
+        });
+      } else {
+        console.warn("Param is undefined or not a valid JSON string");
+      }
     } catch (error) {
-      throw new Error("throw error params");
+      console.error("Error parsing param:", error);
     }
   }, []);
-  console.log(searchParam, JSON.parse(param));
 
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/schools";
+    const url = "http://localhost:5000/api/schools";
 
     const fetchSchools = async (searchParams: any) => {
-      setLoading(true);
       try {
         // const result = await fetch(url, requestOptions);
         const result = await axios.get(url, {
@@ -107,12 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
             className="flex gap-5 md:items-center sm:justify-between cursor-pointer"
             onClick={() => setSwitchMap(!switchMap)}
           >
-            <span
-              className={`rounded-full p-2 flex items-center cursor-pointer ${
-                !switchMap ? "bg-orange-600 text-white" : "text-purple-600"
-              }`}
-            >
-              {/* <span className="rounded-full bg-orange-600 text-white px-2 py-2 flex items-center cursor-pointer"> */}
+            <span className="rounded-full bg-orange-600 text-white px-2 py-2 flex items-center cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
