@@ -3,11 +3,11 @@
 import { useState } from "react";
 
 interface ToEnterProps {
-    isShow: boolean;
-    setShow: any;
+  isShow: boolean;
+  setShow: any;
 }
 
-const ToEnter:React.FC<ToEnterProps> = ({isShow, setShow}) => {
+const ToEnter: React.FC<ToEnterProps> = ({ isShow, setShow }) => {
   const [name, setName] = useState<string>("");
   const [nameVal, setNameVal] = useState<boolean>(false);
   const [cpf, setCPF] = useState<string>("");
@@ -18,10 +18,17 @@ const ToEnter:React.FC<ToEnterProps> = ({isShow, setShow}) => {
   const [passwordVal, setPasswordVal] = useState<boolean>(false);
 
   return (
-    <div className={`${isShow ? "flex" : "hidden"} fixed w-screen top-0 left-0 h-lvh justify-center items-center z-20`}>
+    <div
+      className={`${
+        isShow ? "flex" : "hidden"
+      } fixed w-screen top-0 left-0 h-lvh justify-center items-center z-20`}
+    >
       <div className="absolute w-screen h-lvh bg-slate-700 opacity-50"></div>
       <div className="flex flex-col gap-6 mb-6 md:grid-cols-3 bg-white rounded-lg p-10 z-50">
-        <span className="self-end cursor-pointer" onClick={()=>setShow(false)}>
+        <span
+          className="self-end cursor-pointer"
+          onClick={() => setShow(false)}
+        >
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
             aria-hidden="true"
@@ -91,6 +98,7 @@ const ToEnter:React.FC<ToEnterProps> = ({isShow, setShow}) => {
               aria-describedby="filled_success_help"
               className="block rounded-full px-5 py-1 w-full text-gray-900 bg-gray-50 border focus:outline-purple-500 border-slate-500 appearance-none peer"
               placeholder="Enter your CPF"
+              maxLength={11}
               value={cpf}
               onChange={(e) => setCPF(e.target.value)}
               onBlur={() => setCPFVal(true)}
@@ -174,7 +182,7 @@ const ToEnter:React.FC<ToEnterProps> = ({isShow, setShow}) => {
           </p>
         </div>
         <button className="bg-orange-600 text-white py-2 rounded-full hover:bg-orange-700">
-          <span>Create an account</span>
+          <span>Criar conta</span>
         </button>
       </div>
     </div>

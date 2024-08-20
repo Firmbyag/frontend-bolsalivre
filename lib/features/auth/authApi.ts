@@ -1,11 +1,19 @@
 // services/authApi.ts
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const axiosBaseQuery =
   ({ baseUrl }: { baseUrl: string }) =>
-  async ({ url, method, data }: { url: string; method: string; data?: any }) => {
+  async ({
+    url,
+    method,
+    data,
+  }: {
+    url: string;
+    method: string;
+    data?: any;
+  }) => {
     try {
       console.log(baseUrl + url);
       const result = await axios({
@@ -16,7 +24,7 @@ const axiosBaseQuery =
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as any;
-      toast.error(err)
+      toast.error(err);
       return {
         error: {
           status: err.response?.status,
@@ -27,20 +35,32 @@ const axiosBaseQuery =
   };
 
 export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: axiosBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BACKEND_DEV + '/api' }),
+  reducerPath: "authApi",
+  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:5000/api" }),
   endpoints: (builder) => ({
-    login: builder.mutation<{ token: string, role: string, _id: string }, { email: string; password: string }>({
+    login: builder.mutation<
+      { token: string; role: string; _id: string },
+      { email: string; password: string }
+    >({
       query: (credentials) => ({
-        url: '/users/login',
-        method: 'post',
+        url: "/users/login",
+        method: "post",
         data: credentials,
       }),
     }),
-    register: builder.mutation<{ name: string }, { name:string; cpf:string; email: string; password: string; password2: string }>({
+    register: builder.mutation<
+      { name: string },
+      {
+        name: string;
+        cpf: string;
+        email: string;
+        password: string;
+        password2: string;
+      }
+    >({
       query: (credentials) => ({
-        url: '/users/register',
-        method: 'post',
+        url: "/users/register",
+        method: "post",
         data: credentials,
       }),
     }),

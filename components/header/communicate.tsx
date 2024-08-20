@@ -4,7 +4,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Login from "./login";
 import { MenuTipCard } from "../basecomponents/cards";
-import { getFromLocalStorage, removeFromLocalStorage } from "@/utils/localstorage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "@/utils/localstorage";
 
 interface CommunicateProps {
   menu: number;
@@ -17,7 +20,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
   const [loginStatus, setLoginStatus] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = getFromLocalStorage('token');
+    const token = getFromLocalStorage("token");
     setLoginStatus(token);
   }, [toenter]);
   const toggleEvent = () => {
@@ -32,9 +35,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
             loginStatus ? "pt-3" : "justify-center"
           } gap-2 items-center`}
         >
-          <Link
-            href="https://wa.me/21974734057"
-          >
+          <Link href="https://wa.me/21974734057">
             <span>
               <svg
                 className="w-6 h-6 text-white"
@@ -58,9 +59,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
               </svg>
             </span>
           </Link>
-          <Link
-            href="tel:2121439986"
-          >
+          <Link href="tel:2121439986">
             <span>
               <svg
                 className="w-6 h-6 text-white"
@@ -82,9 +81,12 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
             </span>
           </Link>
           <button
-            onClick={loginStatus ? toggleEvent:() => setToEnter(!toenter)}
-            className={`${loginStatus ? "flex rounded-full bg-white px-1.5 items-center text-sm text-gray-500 space-x-1" 
-              : "px-4 py-2.5 rounded-full border border-purple-800 text-white hover:bg-violet-800"}`}
+            onClick={loginStatus ? toggleEvent : () => setToEnter(!toenter)}
+            className={`${
+              loginStatus
+                ? "flex rounded-full bg-white px-1.5 items-center text-sm text-gray-500 space-x-1"
+                : "px-4 py-2.5 rounded-full border border-purple-800 text-white hover:bg-violet-800"
+            }`}
           >
             <span>{loginStatus ? "H" : "Fazer Login"}</span>
           </button>
@@ -99,22 +101,16 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
       >
         <div className="flex flex-col justify-start">
           <button className="flex gap-5 py-3 justify-start items-center border-purple-400">
-            <span className="bg-orange-600 rounded-full p-0.5">
+            <span className="bg-purple-700 rounded-full p-2">
               <svg
-                className="w-8 h-8 text-white"
-                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="white"
-                viewBox="0 0 24 24"
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 512 512"
               >
                 <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z"
+                  fill="white"
+                  d="M391 480c-19.52 0-46.94-7.06-88-30c-49.93-28-88.55-53.85-138.21-103.38C116.91 298.77 93.61 267.79 61 208.45c-36.84-67-30.56-102.12-23.54-117.13C45.82 73.38 58.16 62.65 74.11 52a176.3 176.3 0 0 1 28.64-15.2c1-.43 1.93-.84 2.76-1.21c4.95-2.23 12.45-5.6 21.95-2c6.34 2.38 12 7.25 20.86 16c18.17 17.92 43 57.83 52.16 77.43c6.15 13.21 10.22 21.93 10.23 31.71c0 11.45-5.76 20.28-12.75 29.81c-1.31 1.79-2.61 3.5-3.87 5.16c-7.61 10-9.28 12.89-8.18 18.05c2.23 10.37 18.86 41.24 46.19 68.51s57.31 42.85 67.72 45.07c5.38 1.15 8.33-.59 18.65-8.47c1.48-1.13 3-2.3 4.59-3.47c10.66-7.93 19.08-13.54 30.26-13.54h.06c9.73 0 18.06 4.22 31.86 11.18c18 9.08 59.11 33.59 77.14 51.78c8.77 8.84 13.66 14.48 16.05 20.81c3.6 9.53.21 17-2 22c-.37.83-.78 1.74-1.21 2.75a176.5 176.5 0 0 1-15.29 28.58c-10.63 15.9-21.4 28.21-39.38 36.58A67.4 67.4 0 0 1 391 480"
                 />
               </svg>
             </span>
@@ -152,9 +148,10 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
           </button>
         </div>
         {loginStatus ? (
-          <button className="flex gap-5 pt-10 justify-start items-center"
+          <button
+            className="flex gap-5 pt-10 justify-start items-center"
             onClick={() => {
-              removeFromLocalStorage('token');
+              removeFromLocalStorage("token");
               setMenu(0);
             }}
           >
@@ -177,9 +174,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
                 ></path>
               </svg>
             </span>
-            <span className="text-purple-500">
-              Sair
-            </span>
+            <span className="text-purple-500">Sair</span>
           </button>
         ) : (
           <button
@@ -189,11 +184,11 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
               setMenu(0);
             }}
           >
-           Faça Login
+            Faça Login
           </button>
         )}
       </div>
-      <Login setShow={setToEnter}  isShow={toenter} />
+      <Login setShow={setToEnter} isShow={toenter} />
     </>
   );
 };

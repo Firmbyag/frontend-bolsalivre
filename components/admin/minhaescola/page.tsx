@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { IoDocumentText, IoLocationSharp } from "react-icons/io5";
 import { MdAddAPhoto } from "react-icons/md";
 import ReactImageUploading from "react-images-uploading";
-import { maskBr } from "js-brasil";
 import { toast } from "react-toastify";
 
 const Minhaescola: React.FC = () => {
