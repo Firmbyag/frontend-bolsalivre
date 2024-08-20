@@ -33,7 +33,9 @@ const axiosBaseQuery =
 
 export const serieApi = createApi({
   reducerPath: "seriesApi",
-  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:5000/api/series" }),
+  baseQuery: axiosBaseQuery({
+    baseUrl: `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series/all`,
+  }),
   endpoints: (builder) => ({
     getSeries: builder.mutation<{ level: [] }, void>({
       query: (credentials) => ({

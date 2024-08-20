@@ -87,7 +87,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
     // Fetch private school data when component mounts
     const fetchLevels = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/levels`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/levels`
+        );
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -100,7 +102,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
 
     const fetchCities = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/cities`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/cities`
+        );
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -113,7 +117,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
 
     const fetchYears = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/periodo`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/periodo`
+        );
         if (!res.ok) {
           throw new Error("Netowrk response was no OK");
         }
@@ -126,7 +132,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
 
     const fetchTurnos = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/turno`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/turno`
+        );
         if (!res.ok) {
           throw new Error("Netowrk response was not OK");
         }
@@ -148,7 +156,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
     const fetchSeries = async () => {
       try {
         const url = changeLevel
-          ? `http://localhost:5000/api/series?levelId=${changeLevel}`
+          ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series?levelId=${changeLevel}`
           : `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series`;
         const res = await fetch(url);
         if (!res.ok) {
@@ -168,8 +176,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
     const fetchNeighs = async () => {
       try {
         const url = changeLevel
-          ? `http://localhost:5000/api/neighs?city=${city}`
-          : `http://localhost:5000/api/neighs`;
+          ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/neighs?city=${city}`
+          : `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/neighs`;
         const res = await fetch(url);
         if (!res.ok) {
           throw new Error("Network response was not ok");

@@ -35,7 +35,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
   }, []);
 
   useEffect(() => {
-    const url = "http://localhost:5000/api/schools";
+    const url = process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/schools";
 
     const fetchSchools = async (searchParams: any) => {
       try {

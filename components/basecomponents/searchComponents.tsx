@@ -39,7 +39,9 @@ const SearchCity: React.FC<SearchButtonProps> = ({
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/cities`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/cities`
+        );
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -168,8 +170,8 @@ const Neighborhood: React.FC<SearchButtonProps> = ({
     const fetchNeighs = async () => {
       const url =
         filters && filters.city && !isEmpty(filters.city)
-          ? `http://localhost:5000/api/neighs?cityId=${filters.city}`
-          : `http://localhost:5000/api/neighs`;
+          ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/neighs?cityId=${filters.city}`
+          : `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/neighs`;
 
       try {
         const res = await fetch(url);
@@ -287,13 +289,16 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
         body = JSON.stringify({ city: filters.city });
       }
       try {
-        const res = await fetch(`http://localhost:5000/api/schools`, {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/schools`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -404,10 +409,10 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
       const level = filters && filters.level;
       const school = filters && filters.school;
       const url = school
-        ? `http://localhost:5000/api/series?schoolId=${school}`
+        ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series?schoolId=${school}`
         : level
-        ? `http://localhost:5000/api/series?levelId=${level}`
-        : `http://localhost:5000/api/series`;
+        ? `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series?levelId=${level}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/series`;
       try {
         const res = await fetch(url);
         if (!res.ok) {
@@ -542,7 +547,9 @@ const TeachingState: React.FC<SearchButtonProps> = ({
   useEffect(() => {
     const fetchLevels = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/levels`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/levels`
+        );
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -669,11 +676,11 @@ const SearchChecked: React.FC<SearchButtonProps> = ({
   useEffect(() => {
     let url;
     if (disp === 1) {
-      url = `http://localhost:5000/api/periodo`;
+      url = `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/periodo`;
     } else if (disp === 2) {
-      url = `http://localhost:5000/api/turno`;
+      url = `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/turno`;
     } else {
-      url = `http://localhost:5000/api/benefits`;
+      url = `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/benefits`;
     }
 
     const fetchData = async () => {

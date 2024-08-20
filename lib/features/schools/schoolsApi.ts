@@ -39,7 +39,9 @@ const axiosBaseQuery =
 
 export const schoolsApi = createApi({
   reducerPath: "schoolsApi",
-  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:5000/api/schools" }),
+  baseQuery: axiosBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/schools",
+  }),
   endpoints: (builder) => ({
     stepSearch: builder.mutation<
       { token: string },
