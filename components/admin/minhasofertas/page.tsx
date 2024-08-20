@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { getUserId, getUserRole } from "@/utils/localstorage";
 import Modal from "@/components/basecomponents/modal";
+import { toast } from "react-toastify";
 
 interface MinhasofertasProps {
   isDel: boolean;
@@ -76,7 +77,7 @@ const Minhasofertas: React.FC<MinhasofertasProps> = ({
   }, [isDel, selectedSchools]);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col xl:gap-1">
       <table className="border-separate border-spacing-2">
         <thead>
           <tr>
@@ -141,31 +142,37 @@ const Minhasofertas: React.FC<MinhasofertasProps> = ({
                     }}
                   />
                 </td>
-                <td  className="border-r border-slate-300 px-4">
-                  <span className="text-xs font-light">{school.level.level}</span>
+                <td className="border-r border-slate-300 px-4">
+                  <span className="text-xs font-light">
+                    {school.level.level}
+                  </span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
-                  <span className="text-xs font-light">{school.series.series}</span>
+                <td className="border-r border-slate-300 px-4">
+                  <span className="text-xs font-light">
+                    {school.series.series}
+                  </span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
+                <td className="border-r border-slate-300 px-4">
                   <span className="text-xs font-light">{school.turno}</span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
+                <td className="border-r border-slate-300 px-4">
                   <span className="text-xs font-light">{school.amount}</span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
-                  <span className="text-xs font-light">{school.monthlyState}</span>
+                <td className="border-r border-slate-300 px-4">
+                  <span className="text-xs font-light">
+                    {school.monthlyState}
+                  </span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
+                <td className="border-r border-slate-300 px-4">
                   <span className="text-xs font-light">{school.regFee}</span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
+                <td className="border-r border-slate-300 px-4">
                   <span className="text-xs font-light">{school.vagas}</span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
+                <td className="border-r border-slate-300 px-4">
                   <span className="text-xs font-light">{school.comments}</span>
                 </td>
-                <td  className="border-r border-slate-300 px-4">
+                <td className="border-r border-slate-300 px-4">
                   <div className="flex gap-5">
                     <span
                       className="cursor-pointer"
@@ -186,7 +193,24 @@ const Minhasofertas: React.FC<MinhasofertasProps> = ({
                         />
                       </svg>
                     </span>
-                    <span className="cursor-pointer">
+                    <span
+                      id="copiar"
+                      className="cursor-pointer"
+                      onClick={async () => {
+                        const schoolInfo = `Etapa: ${school.level.level}\nSérie: ${school.series.series}\nTurno: ${school.turno}\nMensalidade sem desconto: ${school.amount}\nDesconto na mensalidade: ${school.monthlyState}\nValor da matrícula: ${school.regFee}\nVagas: ${school.vagas}\nInformações adicionais: ${school.comments}`;
+
+                        try {
+                          await navigator.clipboard.writeText(schoolInfo);
+
+                          toast.success("Informações copiadas!");
+                        } catch (err) {
+                          console.error("Failed to copy: ", err);
+                          toast.error(
+                            "Erro ao copiar as informações. Por favor, tente novamente."
+                          );
+                        }
+                      }}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="1.2em"
@@ -209,7 +233,9 @@ const Minhasofertas: React.FC<MinhasofertasProps> = ({
             ))
           ) : (
             <tr>
-              <td className="font-light text-xs" colSpan={15}>nenhum escola encontrada.</td>
+              <td className="font-light text-xs" colSpan={15}>
+                nenhum escola encontrada.
+              </td>
             </tr>
           )}
         </tbody>

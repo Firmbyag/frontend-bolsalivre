@@ -274,10 +274,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
         <hr />
         <div className="relative flex justify-center items-center my-4">
           <div className="flex justify-center items-center">
-            {school && school.title && !imagePreview && (
+            {/*{school && school.title && !imagePreview && (
               <SchoolImage title={school.title} />
             )}
-            {/* <label
+            <label
               htmlFor="mark"
               className="flex w-20 h-20 rounded-full cursor-pointer bg-slate-400 border border-spacing-4 border-purple-700 justify-center items-center"
             >
@@ -410,8 +410,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               />
             </div>
             {!isValidMonthly && (
-              <p className="mt-2 text-xs font-light text-red-600" id="email-error">
-               digite uma informação válida.
+              <p
+                className="mt-2 text-xs font-light text-red-600"
+                id="email-error"
+              >
+                digite uma informação válida.
               </p>
             )}
           </div>
