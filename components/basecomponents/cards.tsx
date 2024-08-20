@@ -415,20 +415,36 @@ const CategoriesCard: React.FC<CategoriesCardProps> = ({ name }) => {
   );
 };
 
+interface Serie {
+  name: string;
+}
+
+interface School {
+  title: string;
+  years: string[];
+  series: Serie;
+  turno: string[];
+  scholarUnit: string;
+  amount: number;
+  monthlyState: number;
+}
+
 interface EscolaDetailCardProps {
-  school: any | null;
+  school: School | null;
 }
 
 const EscolaDetailCard: React.FC<EscolaDetailCardProps> = ({ school }) => {
-  const [selectedYear, setSelectedYear] = useState<any>();
-  const [selectedSerie, setSelectedSerie] = useState<any>("");
-  const [selectedturno, setSelectedturno] = useState<any>("");
+  const [selectedYear, setSelectedYear] = useState<string | undefined>();
+  const [selectedSerie, setSelectedSerie] = useState<string>("");
+  const [selectedTurno, setSelectedTurno] = useState<string>("");
   const [serieShow, setSerieShow] = useState<boolean>(false);
-  const [turnoShow, setturnoShow] = useState<boolean>(false);
+  const [turnoShow, setTurnoShow] = useState<boolean>(false);
 
   useEffect(() => {
-    school && setSelectedSerie(school.series);
-    school && setSelectedturno(school.turno[0]);
+    if (school) {
+      setSelectedSerie(school.series.name);
+      setSelectedTurno(school.turno[0]);
+    }
   }, [school]);
 
   if (school) {
@@ -454,7 +470,7 @@ const EscolaDetailCard: React.FC<EscolaDetailCardProps> = ({ school }) => {
         <div className="flex flex-col gap-1">
           <span className="text-lg font-semibold">Serie</span>
           <div className="flex justify-between gap-5">
-            <span>{selectedSerie}</span>
+            <span>{selectedSerie || "Nenhuma série selecionada"}</span>
             <button
               className="rounded-full bg-purple-100 text-purple-500 border border-purple-300 focus:ring-purple-300 px-5 py-2"
               onClick={() => setSerieShow(true)}
@@ -466,10 +482,10 @@ const EscolaDetailCard: React.FC<EscolaDetailCardProps> = ({ school }) => {
         <div className="flex flex-col gap-1">
           <span className="text-lg font-semibold">Turno</span>
           <div className="flex justify-between gap-5">
-            <span>{selectedturno}</span>
+            <span>{selectedTurno}</span>
             <button
               className="rounded-full bg-purple-100 text-purple-500 border border-purple-300 focus:ring-purple-300 px-5 py-2"
-              onClick={() => setturnoShow(true)}
+              onClick={() => setTurnoShow(true)}
             >
               Alterar
             </button>
@@ -524,17 +540,20 @@ const EscolaDetailCard: React.FC<EscolaDetailCardProps> = ({ school }) => {
         </Link>
         <EscolaRegisterCard
           option={selectedSerie}
-          options={school.series.series}
+          options={[{ _id: 0, name: school.series.name }]}
           setOption={setSelectedSerie}
           show={serieShow}
           setShow={setSerieShow}
         />
         <EscolaRegisterCard
-          option={selectedturno}
-          options={school.turno}
-          setOption={setSelectedturno}
+          option={selectedTurno}
+          options={school.turno.map((turno, index) => ({
+            _id: index,
+            name: turno,
+          }))}
+          setOption={setSelectedTurno}
           show={turnoShow}
-          setShow={setturnoShow}
+          setShow={setTurnoShow}
         />
       </div>
     );
@@ -544,15 +563,15 @@ const EscolaDetailCard: React.FC<EscolaDetailCardProps> = ({ school }) => {
 };
 
 interface EscolaRegisterCardProps {
-  options?: any[];
-  option?: any;
-  setOption?: any;
+  options?: Array<{ _id: number; name: string }>;
+  option?: string;
+  setOption?: (option: string) => void;
   show: boolean;
-  setShow?: any;
+  setShow?: (show: boolean) => void;
 }
 
 const EscolaRegisterCard: React.FC<EscolaRegisterCardProps> = ({
-  options,
+  options = [],
   option,
   setOption,
   show,
@@ -573,22 +592,24 @@ const EscolaRegisterCard: React.FC<EscolaRegisterCardProps> = ({
           Selecione o turno desejado
         </span>
         <div className="flex flex-col gap-5 h-[400px] overflow-y-scrol overflow-hidden px-5">
-          {options &&
-            options.length > 0 &&
-            options?.map((op: any, index: any) => (
-              <div className="flex gap-1" key={index}>
+          {options.length > 0 ? (
+            options.map((op) => (
+              <div className="flex gap-1" key={op._id}>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
-                    value={op}
-                    checked={option === op}
-                    onChange={() => setOption(op)}
+                    value={op.name}
+                    checked={option === op.name}
+                    onChange={() => setOption && setOption(op.name)}
                     className="form-radio text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="ml-2">{op}</span>
+                  <span className="ml-2">{op.name}</span>
                 </label>
               </div>
-            ))}
+            ))
+          ) : (
+            <div>Nenhuma opção disponível</div>
+          )}
         </div>
         <div
           className="bg-purple-600 text-white py-2 rounded-full text-center cursor-pointer"

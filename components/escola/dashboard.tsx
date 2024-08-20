@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Filters from "@/components/basecomponents/filters";
@@ -19,25 +19,29 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {  
-    try {        
-      setSearchParam({  
-        ...searchParam,
-        ...JSON.parse(param)
-      });   
-    } catch (error) { throw new Error("throw error params"); }    
-  }, []);
-  console.log(searchParam, JSON.parse(param));
-  
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_BACKEND_DEV + '/api/schools';
+    try {
+      if (param && typeof param === "string") {
+        setSearchParam({
+          ...searchParam,
+          ...JSON.parse(param),
+        });
+      } else {
+        console.warn("Param is undefined or not a valid JSON string");
+      }
+    } catch (error) {
+      console.error("Error parsing param:", error);
+    }
+  }, []);
 
-    const fetchSchools = async (searchParams: any) => {      
+  useEffect(() => {
+    const url = "http://localhost:5000/api/schools";
 
+    const fetchSchools = async (searchParams: any) => {
       try {
         // const result = await fetch(url, requestOptions);
         const result = await axios.get(url, {
-          params: searchParams
+          params: searchParams,
         });
         if (!result) {
           throw new Error(`HTTP error! Status: ${result.status}`);
@@ -46,7 +50,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
 
         setSchools(data);
       } catch (error) {
-        console.error('Error fetching schools:', error);
+        console.error("Error fetching schools:", error);
       }
     };
 
@@ -64,7 +68,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParam])
+  }, [searchParam]);
 
   return (
     <div className="flex flex-col bg-slate-100 py-0 space-y-6 items-center">
@@ -105,7 +109,10 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
               </svg>
             </span>
           </div>
-          <div className="flex gap-5 md:items-center sm:justify-between cursor-pointer" onClick={() => setSwitchMap(!switchMap)}>
+          <div
+            className="flex gap-5 md:items-center sm:justify-between cursor-pointer"
+            onClick={() => setSwitchMap(!switchMap)}
+          >
             <span className="rounded-full bg-orange-600 text-white px-2 py-2 flex items-center cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,21 +142,26 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
           </div>
         </div>
       </div>
-      {
-        switchMap ?
-          <Map /> :
-          <div className="pt-0 flex gap-5 xl:w-[80vw] lg:w-[90vw] max-w-screen-xl lg:px-3 pb-5">
-            <div className="max-[1200px]:hidden">
-              <Filters type={`search`} level={searchParam && searchParam.level} setSearchParam={setSearchParam} />
-            </div>
+      {switchMap ? (
+        <Map />
+      ) : (
+        <div className="pt-0 flex gap-5 xl:w-[80vw] lg:w-[90vw] max-w-screen-xl lg:px-3 pb-5">
+          <div className="max-[1200px]:hidden">
+            <Filters
+              type={`search`}
+              level={searchParam && searchParam.level}
+              setSearchParam={setSearchParam}
+            />
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 xl:w-[80vw] lg:w-[90vw] max-w-screen-xl px-3 pb-5">
-              {
-                !schools && (
-                  <div className="flex col-span-2 justify-center items-center">Carregando...</div>
-                )
-              }
-              {schools && schools.map((result: any, index: number) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 xl:w-[80vw] lg:w-[90vw] max-w-screen-xl px-3 pb-5">
+            {!schools && (
+              <div className="flex col-span-2 justify-center items-center">
+                Carregando...
+              </div>
+            )}
+            {schools &&
+              schools.map((result: any, index: number) => (
                 <div
                   key={index}
                   className="bg-white max-w-sm p-4 border border-gray-200 rounded-lg"
@@ -172,12 +184,11 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
                   />
                 </div>
               ))}
-            </div>
           </div>
-      }
+        </div>
+      )}
     </div>
   );
 };
 
 export default Dashboard;
-

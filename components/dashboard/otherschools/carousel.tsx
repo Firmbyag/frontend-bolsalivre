@@ -5,59 +5,64 @@ import "swiper/scss";
 import "swiper/scss/pagination";
 import { OtherSchoolsCard } from "../../basecomponents/cards";
 
-const OtherSchools = [{
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20190128114624518.png",
-  star: 5,
-  title: "Santo Antonio College",
-  position: "Iririu",
-  at: "Joinville - SC",
-  secure: "PRIVATE SCHOOL"
-},
-{
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20220202203102288.jpg",
-  star: 5,
-  title: "Intergenius College",
-  position: "Juliao Ramos",
-  at: "Macapa - AP",
-  secure: "PRIVATE SCHOOL"
-}, {
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20221214132343404.jpg",
-  star: 5,
-  title: "Djanira Tavares College",
-  position: "cruise",
-  at: "Campina Grande - PB",
-  secure: "PRIVATE SCHOOL"
-}, {
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20210921124838626.jpg",
-  star: 5,
-  title: "Colegio Rumo Initial",
-  position: "Sao, Joao Climaco",
-  at: "Sao Paulo - SP",
-  secure: "PRIVATE SCHOOL"
-}, {
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20230612201001704.png",
-  star: 5,
-  title: "Filomena De Marco College",
-  position: "Guarani Park",
-  at: "Sao Paulo - SP",
-  secure: "PRIVATE SCHOOL"
-},
-{
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20191126021330631.png",
-  star: 4,
-  title: "Caragua Goal",
-  position: "Sumare",
-  at: "Caraguatatuba - SP",
-  secure: "PRIVATE SHCOOL"
-},
-{
-  mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20221027192739266.jpg",
-  star: 4,
-  title: "Colegio Objective Hortolandia",
-  position: "Remanso Campineiro",
-  at: "Hortolandia - SP",
-  secure: "PRIVATE SCHOOL"
-}];
+const OtherSchools = [
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20190128114624518.png",
+    star: 5,
+    title: "Santo Antonio College",
+    position: "Iririu",
+    at: "Joinville - SC",
+    secure: "ESCOLA PRIVADA",
+  },
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20220202203102288.jpg",
+    star: 5,
+    title: "Intergenius College",
+    position: "Juliao Ramos",
+    at: "Macapa - AP",
+    secure: "ESCOLA PRIVADA",
+  },
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20221214132343404.jpg",
+    star: 5,
+    title: "Djanira Tavares College",
+    position: "cruise",
+    at: "Campina Grande - PB",
+    secure: "ESCOLA PRIVADA",
+  },
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20210921124838626.jpg",
+    star: 5,
+    title: "Colegio Rumo Initial",
+    position: "Sao, Joao Climaco",
+    at: "Sao Paulo - SP",
+    secure: "ESCOLA PRIVADA",
+  },
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20230612201001704.png",
+    star: 5,
+    title: "Filomena De Marco College",
+    position: "Guarani Park",
+    at: "Sao Paulo - SP",
+    secure: "ESCOLA PRIVADA",
+  },
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20191126021330631.png",
+    star: 4,
+    title: "Caragua Goal",
+    position: "Sumare",
+    at: "Caraguatatuba - SP",
+    secure: "ESCOLA PRIVADA",
+  },
+  {
+    mark: "https://img.imageboss.me/me/cover:center/48x48/format:auto/20221027192739266.jpg",
+    star: 4,
+    title: "Colegio Objective Hortolandia",
+    position: "Remanso Campineiro",
+    at: "Hortolandia - SP",
+    secure: "ESCOLA PRIVADA",
+  },
+];
 
 const CarouselComponent: React.FC = () => {
   return (

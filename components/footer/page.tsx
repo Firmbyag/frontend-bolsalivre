@@ -4,7 +4,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 const Footer: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 mt-10 bg-purple-600 text-white">
-      <div className="lg:flex lg:justify-around lg:gap-5 lg:px-40 px-10 py-5">
+      <div className="grid grid-cols-2 lg:flex lg:justify-around lg:gap-5 lg:px-40 px-10 py-5">
         <div className="flex flex-col gap-2 my-4">
           <p className="text-lg font-semibold">Parceiros</p>
           <div className="flex flex-col gap-1">
@@ -85,14 +85,16 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="flex gap-3 items-center my-3">
-          <AiOutlineQuestionCircle size={32} />
-          <span className="text-base font-light">
+          <AiOutlineQuestionCircle size={42} />
+          <span className="ml-1 text-base font-light">
             Tire suas dúvidas em nossa central de ajuda
           </span>
         </div>
       </div>
       <div className="lg:flex flex-col justify-center items-center font-light gap-4 lg:px-40 px-10 py-10 bg-purple-800 text-slate-200">
-        <p className="font-normal">Todos os direitos reservados a Bolsa Livre • CNPJ 17.669.221/0001-50</p>
+        <p className="font-normal">
+          Todos os direitos reservados a Bolsa Livre • CNPJ 17.669.221/0001-50
+        </p>
         <a href="https://firmby.site/" target="_blank" className="text-xs">
           desenvolvido por Firmby
         </a>
