@@ -4,19 +4,18 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/public/assets/images/logo_blue.png";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { removeFromLocalStorage } from "@/utils/localstorage";
-
 
 interface CommunicateProps {
   activeTab?: number;
 }
 
-const Header: React.FC<CommunicateProps> = ({activeTab}) => {
+const Header: React.FC<CommunicateProps> = ({ activeTab }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [menuShow, setMenuShow] = useState<boolean>(false);  
-  
-  const toggleEvent = () => {    
+  const [menuShow, setMenuShow] = useState<boolean>(false);
+
+  const toggleEvent = () => {
     setMenuShow(!menuShow);
   };
   return (
@@ -57,7 +56,11 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
         </div>
         <div className="hidden md:flex md:flex-row justify-between items-center">
           <ul className="flex justify-between items-center space-x-1">
-            <li className={`${activeTab === 1 && 'text-orange-600 font-semibold'}`}>
+            <li
+              className={`${
+                activeTab === 1 && "text-orange-600 font-semibold"
+              }`}
+            >
               <Link
                 href={`/admin/${encodeURIComponent("Panel do Gestor")}`}
                 className="flex justify-between items-center hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -65,7 +68,11 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Painel do Gestor</span>
               </Link>
             </li>
-            <li className={`${activeTab === 2 && 'text-orange-600 font-semibold'}`}>
+            <li
+              className={`${
+                activeTab === 2 && "text-orange-600 font-semibold"
+              }`}
+            >
               <Link
                 href={`/admin/${encodeURIComponent("Minha Escola")}`}
                 className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -73,7 +80,11 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Minha Escola</span>
               </Link>
             </li>
-            <li className={`${activeTab === 3 && 'text-orange-600 font-semibold'}`}>
+            <li
+              className={`${
+                activeTab === 3 && "text-orange-600 font-semibold"
+              }`}
+            >
               <Link
                 href={`/admin/${encodeURIComponent("Minhas Ofertas")}`}
                 className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -81,7 +92,11 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                 <span>Minhas Ofertas</span>
               </Link>
             </li>
-            <li className={`${activeTab === 4 && 'text-orange-600 font-semibold'}`}>
+            <li
+              className={`${
+                activeTab === 4 && "text-orange-600 font-semibold"
+              }`}
+            >
               <Link
                 href={`/admin/${encodeURIComponent("Meus Alunos")}`}
                 className="flex justify-between items-center  hover:rounded-full hover:bg-slate-100 p-3 text-[12px]"
@@ -117,24 +132,32 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                     d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144"
                   />
                 </svg>
-                <button  className="flex flex-col text-xs" onClick={() => {toggleEvent()}}>
+                <button
+                  className="flex flex-col text-xs"
+                  onClick={() => {
+                    toggleEvent();
+                  }}
+                >
                   <span> Nome de usuário </span>
-                  <span className="text-[10px] font-light"> Dados de conta </span>
+                  <span className="text-[10px] font-light">
+                    {" "}
+                    Dados de conta{" "}
+                  </span>
                 </button>
-                {menuShow && 
-                    <div className="origin-top-right absolute right-24 mt-[85px] text-center w-32 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                      <a
-                        onClick={() => {
-                          removeFromLocalStorage('token');
-                          window.location.href='/';
-                          toast.success("Logout feito com sucesso")
-                        }}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                       🏃‍♂️ Sair
-                      </a>
-                    </div>
-                }
+                {menuShow && (
+                  <div className="origin-top-right absolute right-24 mt-[85px] text-center w-32 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
+                    <a
+                      onClick={() => {
+                        removeFromLocalStorage("token");
+                        window.location.href = "/";
+                        toast.success("Logout feito com sucesso");
+                      }}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      🏃‍♂️ Sair
+                    </a>
+                  </div>
+                )}
               </div>
             </li>
           </ul>
@@ -206,27 +229,29 @@ const Header: React.FC<CommunicateProps> = ({activeTab}) => {
                     d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144"
                   />
                 </svg>
-                <button 
+                <button
                   className="flex flex-col text-xs"
-                  onClick={() => {toggleEvent()}}
+                  onClick={() => {
+                    toggleEvent();
+                  }}
                 >
                   <span> Teste 01 </span>
                   <span className="text-orange-500"> Dados de conta </span>
                 </button>
-                {menuShow && 
-                    <div className="origin-top-right absolute right-0 mt-20 text-center w-32 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                      <a
-                        onClick={() => {
-                          removeFromLocalStorage('token');
-                          window.location.href='/';
-                          toast.success("Successfully logged out....")
-                        }}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Sair
-                      </a>
-                    </div>
-                }
+                {menuShow && (
+                  <div className="origin-top-right absolute right-0 mt-20 text-center w-32 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
+                    <a
+                      onClick={() => {
+                        removeFromLocalStorage("token");
+                        window.location.href = "/";
+                        toast.success("Successfully logged out....");
+                      }}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Sair
+                    </a>
+                  </div>
+                )}
               </div>
             </li>
           </ul>

@@ -26,12 +26,14 @@ const Minhaescola: React.FC = () => {
   };
 
   const { register, watch, handleSubmit } = useForm();
-  
+
   const fetchSchool = async () => {
-   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/schools-details`)
-   const data = await response.json()
-   console.log(data)
-  }
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_DEV}/api/schools-details`
+    );
+    const data = await response.json();
+    console.log(data);
+  };
 
   const postSchoolInfo = async (schoolData) => {
     try {
@@ -73,8 +75,8 @@ const Minhaescola: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchSchool()
-  }, [])
+    fetchSchool();
+  }, []);
 
   return (
     <div className="flex flex-col gap-5">
@@ -208,6 +210,7 @@ const Minhaescola: React.FC = () => {
               </label>
               <input
                 placeholder="cpf do responsável legal"
+                maxLength={11}
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
                 {...register("schoolResponsibleCPF")}
               />
@@ -587,6 +590,7 @@ const Minhaescola: React.FC = () => {
             <div className="flex-col my-2">
               <label htmlFor="">Telefone</label>
               <input
+                maxLength={9}
                 placeholder="(xx) xxxxx-xxxx"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
                 {...register("schoolPhone")}
@@ -595,6 +599,7 @@ const Minhaescola: React.FC = () => {
             <div className="flex-col my-2">
               <label htmlFor="">Celular</label>
               <input
+                maxLength={11}
                 placeholder="(xx) xxxxx-xxxx"
                 className="px-10 py-3 text-sm rounded-full w-full focus:outline-none border border-purple-500 focus:ring-2 focus:ring-purple-500"
                 {...register("schoolCellphone")}

@@ -113,7 +113,7 @@ const OfertasBoard: React.FC<Title> = ({ title }) => {
           </div>
         </div>
         <hr className="mt-4" />
-        <div className="flex flex-col md:flex-row justify-between pt-4 w-full gap-5">
+        <div className="flex flex-col md:flex-row justify-between pt-4 w-full gap-5 lg:overflow-auto">
           <Minhasofertas
             isModalOpen={isModalOpen}
             openModal={openModal}
