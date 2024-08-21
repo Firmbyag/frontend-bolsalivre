@@ -633,30 +633,30 @@ const MenuTipCard: React.FC = () => {
       <Link
         href={`/admin/Panel%20do%20Gestor`}
         // href={`/meus-dados/${encodeURIComponent('Meu perfil')}`}
-        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100"
       >
         Meu perfil
       </Link>
       <Link
         href={`/meus-dados/${encodeURIComponent("Meus dados")}`}
-        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100"
       >
         Meus dados
       </Link>
       <Link
         href={`/meus-dados/${encodeURIComponent("Minhas bolsas")}`}
-        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b"
+        className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 border-b"
       >
         Minhas bolsas
       </Link>
-      {getUserRole() !== "customer" && getUserRole() !== "student" && (
+      {/* {getUserRole() !== "customer" && getUserRole() !== "student" && (
         <Link
           href={`/admin/Panel%20do%20Gestor`}
           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
         >
           Management
         </Link>
-      )}
+      )} */}
       <a
         onClick={() => {
           removeFromLocalStorage("token");

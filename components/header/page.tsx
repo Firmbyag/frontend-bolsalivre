@@ -10,10 +10,12 @@ import Menu from "./menu";
 
 const Header = () => {
   const [menu, setMenu] = useState<number>(0);
+  const [filters, setFilters] = useState<any>();
 
   const SHOW_NONE = 0;
   const SHOW_SEARCH = 1;
   const SHOW_COMMUNICATE = 2;
+
 
   return (
     <div className="flex flex-col items-center lg:p-4 p-2 gap-4 bg-purple-700 ">
@@ -66,7 +68,7 @@ const Header = () => {
                 type="text"
                 className="px-5 text-xl py-2 rounded-full w-full"
                 placeholder="Buscar por escolas"
-                onClick={() => setMenu(SHOW_COMMUNICATE)} // You might want to consider onFocus instead of onClick
+                // onClick={() => setMenu(SHOW_COMMUNICATE)} // You might want to consider onFocus instead of onClick
               />
               <IoSearch size={24} className="absolute right-3" />
             </div>
@@ -78,7 +80,12 @@ const Header = () => {
               menu === SHOW_SEARCH ? "flex" : "lg:static"
             }`}
           >
-            <SearchList menu={menu} setMenu={setMenu} />
+            <SearchList
+              menu={menu}
+              setMenu={setMenu}
+              filters={filters}
+              setFilters={setFilters}
+            />
             {/* <Menu menu={menu} />   */}
           </div>
         </div>

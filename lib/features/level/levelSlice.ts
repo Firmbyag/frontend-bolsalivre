@@ -31,7 +31,7 @@ const levelSlice = createSlice({
       state.user = decoded;
       state.token = action.payload.token;
       state.status = "succeeded";
-      toast.success("Successfully logged in....")
+      toast.success("Operação feita com sucesso!")
     },
     clearCredentials: (state) => {
       state.token = null;

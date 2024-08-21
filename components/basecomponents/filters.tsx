@@ -84,7 +84,7 @@ const Filters: React.FC<FilterProps> = ({ type, level, setSearchParam }) => {
           <SearchChecked
             disp={1}
             className=""
-            checkedLabel="Ano da bolsa:"
+            checkedLabel="Ano de vigência:"
             filters={filters}
             setFilters={setFilters}
           />
@@ -96,13 +96,13 @@ const Filters: React.FC<FilterProps> = ({ type, level, setSearchParam }) => {
           filters={filters}
           setFilters={setFilters}
         />
-        <SearchChecked
+        {/* <SearchChecked
           disp={3}
           className=""
           checkedLabel="Benefícios:"
           filters={filters}
           setFilters={setFilters}
-        />
+        /> */}
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 'use client';
 import { Suspense } from "react";
 import Dashboard from "@/components/dashboard/page";
-const Header = dynamic(()=> import("@/components/header/page"), { ssr: false});
+import Header from "@/components/header/page";
+// const Header = dynamic(()=> import("@/components/header/page"), { ssr: false});
 import Footer from "@/components/footer/page";
 import "@/app/globals.css";
 import dynamic from "next/dynamic";

@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
     getByPrivate()
     .unwrap()
     .then((fetchedData) => {
+      console.log('fetchData', fetchedData);
       setPrivateSchoolsData(fetchedData); // Update state with fetched data      
     })
     .catch((err) => {
@@ -26,7 +27,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 items-center sm:gap-8 md:gap-6">
       <TeachStage />
-      <PrivateSchools privateSchoolsData = {privateSchoolsData} />
+      <PrivateSchools privateSchoolsData={privateSchoolsData} />
       <Transforming />
       <OtherSchools />
       {/* <Works /> */}

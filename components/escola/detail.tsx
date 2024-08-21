@@ -25,7 +25,6 @@ const Detail: React.FC<DetailProps> = ({ title }) => {
           throw new Error(`HTTP error! Status: ${result.status}`);
         }
         const data = await result.data;
-        console.log(data);
 
         setSchool(data[0]);
       } catch (error) {

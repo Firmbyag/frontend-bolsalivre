@@ -50,23 +50,19 @@ const Minhaescola: React.FC = () => {
   };
 
   const onSubmitSchool = (data) => {
-    console.log(data);
     postSchoolInfo(data);
   };
   const onSubmitAddress = (data) => {
-    console.log(data);
     postSchoolInfo(data);
   };
 
   const onSubmitMedia = (data) => {};
 
   const onSubmitContact = (data) => {
-    console.log(data);
     postSchoolInfo(data);
   };
 
   const onSubmitDocuments = (data) => {
-    console.log(data);
     postSchoolInfo(data);
   };
 

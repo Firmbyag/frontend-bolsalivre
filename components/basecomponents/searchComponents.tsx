@@ -44,7 +44,6 @@ const SearchCity: React.FC<SearchButtonProps> = ({
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        console.log(data);
         setCities(data);
       } catch (err) {
         console.error("Error: Level loading error!!!");
@@ -103,7 +102,7 @@ const SearchCity: React.FC<SearchButtonProps> = ({
         <>
           {disp === 1 && (
             <label htmlFor="" className="font-semibold text-lg">
-              City:
+              Cidade:
             </label>
           )}
           <div className="flex items-center relative rounded-full border">
@@ -444,7 +443,7 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
               filterName="série"
               renderItem={renderItem}
               className="px-5"
-              placeholder="Filtrar por cidade..."
+              placeholder="Filtrar por série..."
             />
             <span className="absolute left-1">
               <svg
@@ -622,7 +621,7 @@ const SearchRadius: React.FC<SearchButtonProps> = ({
           <label htmlFor="" className="font-semibold text-sm" >
             Raio de busca
           </label>
-          <p>até {radiusValue} km</p>
+          <p>até {radiusValue ?? 0} km</p>
           <input
             type="range"
             onChange={(e) => {

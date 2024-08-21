@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import Image from "next/image";
 import {
   SearchCity,
@@ -12,12 +12,13 @@ import { IoCloseCircle } from "react-icons/io5";
 import Logo from "@/public/assets/images/logo_common.png";
 
 interface SearchListProps {
+  filters: any,
+  setFilters: Dispatch<any>,
   menu: number;
   setMenu: (menu: number) => void; // More specific type for setMenu
 }
 
-const SearchList: React.FC<SearchListProps> = ({ menu, setMenu }) => {
-  const [filters, setFilters] = useState<any>();
+const SearchList: React.FC<SearchListProps> = ({ filters, setFilters, menu, setMenu }) => {
 
   // Determine the width class based on the school state
   const widthClass = filters && filters.school ? "w-1/4" : "w-1/3";
@@ -101,7 +102,7 @@ const SearchList: React.FC<SearchListProps> = ({ menu, setMenu }) => {
             />
 
             <button className="mx-14 py-2 bg-orange-500 text-white hover:bg-orange-400 rounded-full">
-              Search
+              Buscar
             </button>
           </div>
         </div>

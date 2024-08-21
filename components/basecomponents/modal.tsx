@@ -394,27 +394,23 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               </div>
               <input
                 type="text"
-                className={`${
-                  isValidMonthly
-                    ? "focus:ring-purple-500"
-                    : " focus:ring-red-600"
-                }bg-gray-50 focus:outline-none focus:ring-1 text-gray-900 text-sm rounded-full border block w-full ps-10 p-2.5`}
+                className={`bg-gray-50 focus:outline-none focus:ring-1 text-gray-900 text-sm rounded-full border block w-full ps-10 p-2.5`}
                 placeholder="00.00"
-                pattern="^\d{2}\.\d{2}$"
+                // pattern="^\d{2}\.\d{2}$"
                 value={monthly}
                 onChange={(e) => {
                   setMonthly(e.target.value);
-                  const pattern = /^\d{2}\.\d{2}$/;
-                  setIsValidMonthly(pattern.test(e.target.value));
+                  // const pattern = /^\d{2}\.\d{2}$/;
+                  // setIsValidMonthly(pattern.test(e.target.value));
                 }}
                 required
               />
             </div>
-            {!isValidMonthly && (
+            {/* {!isValidMonthly && (
               <p className="mt-2 text-xs font-light text-red-600" id="email-error">
                digite uma informação válida.
               </p>
-            )}
+            )} */}
           </div>
           <div className="mb-5">
             <label className="block mb-2 text-sm font-light text-gray-900 dark:text-gray-500">
@@ -518,7 +514,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, school }) => {
               onChange={(e) => setType(e.target.value)}
               required
             >
-              <option value="public">público</option>
+              {/* <option value="public">público</option> */}
               <option value="private">privado</option>
             </select>
           </div>
