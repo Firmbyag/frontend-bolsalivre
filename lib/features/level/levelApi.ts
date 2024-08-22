@@ -33,7 +33,9 @@ const axiosBaseQuery =
 
 export const levelApi = createApi({
   reducerPath: "levelApi",
-  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:5000/api/levels" }),
+  baseQuery: axiosBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/levels",
+  }),
   endpoints: (builder) => ({
     getLevel: builder.mutation<{ level: [] }, void>({
       query: (credentials) => ({

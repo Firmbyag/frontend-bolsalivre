@@ -23,7 +23,7 @@ const TeachStage: React.FC = () => {
 
   useEffect(() => {
     const fetchLevels = async () => {
-      const url = "http://localhost:5000/api/levels";
+      const url = process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/levels";
 
       try {
         const result = await fetch(url);

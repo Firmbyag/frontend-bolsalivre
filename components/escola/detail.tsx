@@ -13,7 +13,7 @@ interface DetailProps {
 const Detail: React.FC<DetailProps> = ({ title }) => {
   const [school, setSchool] = useState<any>();
   useEffect(() => {
-    const url = "http://localhost:5000/api/schools";
+    const url = process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/schools";
     const fetchSchool = async () => {
       try {
         const result = await axios({
