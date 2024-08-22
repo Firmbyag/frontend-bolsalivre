@@ -53,12 +53,12 @@ const TeachStage: React.FC = () => {
           className="block lg:hidden"
         />
 
-        <div className="flex flex-col justify-center bottom-0 lg:w-2/3 mx-5 w-lvw mt-5">
-          <p className="font-semibold lg:self-start self-center px-4 lg:px-10 py-1 text-purple-500 text-center bg-white rounded-t-3xl ml-5">
+        <div className="lg:flex lg:flex-col lg:justify-center bottom-0 lg:w-2/3 mx-5 w-full mt-5">
+          <p className="font-semibold lg:self-start self-center px-4 lg:px-14 py-1 text-purple-500 text-center bg-white rounded-t-3xl ml-5">
             Buscar pela etapa de formação
           </p>
           {levels.length > 0 && (
-            <div className="tag-container overflow-auto inline-flex gap-5 bg-white justify-around p-5 rounded-tr-lg">
+            <div className="tag-container grid grid-cols-2  overflow-auto lg:inline-flex gap-5 bg-white justify-around p-5 rounded-tr-lg">
               <button
                 onClick={() => {
                   setFilters({ ...filters, level: levels[0]._id });
@@ -171,7 +171,7 @@ const TeachStage: React.FC = () => {
           )}
         </div>
       </div>
-      {/*}
+      {/*
       <div
         className="lg:flex lg:justify-around items-end lg:w-2/3 grid w-lvw gap-5 p-5 
       border-b-[1px] border-l-[1px] border-r-[1px] rounded-b-lg z-10"

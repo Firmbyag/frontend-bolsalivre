@@ -266,7 +266,7 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
       </div>
       <hr className="p-2" />
       <div className="flex flex-col text-sm">
-        <p>School year</p>
+        <p>Ano escolar</p>
         <span className="flex justify-start">{schoolYearArray}</span>
         <p>turno</p>
         <span className="flex flex-wrap justify-start">{turnoArray}</span>
@@ -285,7 +285,7 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
         </p>
       </div>
       <div className="flex flex-col justify-between">
-        <span>Level</span>
+        <span>Série</span>
         <span>{level}</span>
       </div>
 
@@ -293,9 +293,9 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
         <Link
           // type="button"
           href={`/escola/${encodeURIComponent(title)}`}
-          className="text-white py-2 bg-orange-500 hover:bg-orange-600 focus:outline-double focus:ring-4 focus:ring-purple-500 font-medium rounded-full text-sm px-5 text-center me-2"
+          className="text-white py-2 bg-orange-500 hover:bg-orange-600 focus:outline-double font-medium rounded-full text-sm px-5 text-center me-2"
         >
-          See Scholarship
+          Ver bolsa de estudo
         </Link>
       </div>
     </div>

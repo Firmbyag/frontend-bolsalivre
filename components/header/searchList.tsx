@@ -27,19 +27,19 @@ const SearchList: React.FC<SearchListProps> = ({ menu, setMenu }) => {
       <div className="flex flex-wrap items-center rounded-full bg-white mt-3 2xl:w-[40vw] xl:w-[50vw] lg:w-[60vw] md:w-[87vw] sm:w-[86vw] w-[74vw]">
         <SearchCity
           disp={0}
-          className={`lg:flex hidden flex-col relative ${widthClass} border-r-2 border-slate-300 pl-2`}
+          className={`lg:flex hidden flex-col relative ${widthClass} border-r-2 border-slate-300 pl-4`}
           filters={filters}
           setFilters={setFilters}
         />
         <Neighborhood
           disp={0}
-          className={`lg:flex hidden flex-col relative ${widthClass} border-r-2 border-slate-300 pl-3`}
+          className={`lg:flex hidden flex-col relative ${widthClass} border-r-2 border-slate-300 pl-4`}
           filters={filters}
           setFilters={setFilters}
         />
         <SearchSeries
           disp={0}
-          className={`lg:flex hidden flex-col relative ${widthClass} pl-3 `}
+          className={`lg:flex hidden flex-col relative ${widthClass} pl-4`}
           filters={filters}
           setFilters={setFilters}
         />

@@ -16,7 +16,7 @@ const Header = () => {
   const SHOW_COMMUNICATE = 2;
 
   return (
-    <div className="flex flex-col items-center lg:p-4 p-2 gap-4 bg-purple-700 ">
+    <div className="flex flex-col items-center lg:p-4 p-2 gap-4 bg-purple-700">
       <div
         className={`flex ${
           menu === SHOW_SEARCH
@@ -31,7 +31,7 @@ const Header = () => {
               menu === SHOW_SEARCH ? "hidden" : "flex"
             }`}
           >
-            <div className="flex justify-between">
+            <div className="flex justify-between ">
               <a href="/">
                 <Image
                   src={Logo}

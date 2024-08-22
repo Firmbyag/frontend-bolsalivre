@@ -4,6 +4,9 @@
 import { useState, useEffect } from "react";
 import CustomSelect from "./selectComponent";
 import { isEmpty } from "@/utils/is-empty";
+import neighicon from "@/public/assets/images/neigh_hood.svg";
+import seriesicon from "@/public/assets/images/serie-icon.svg";
+import Image from "next/image";
 
 const checkedData = [
   ["2022", "2023", "2024", "2025"],
@@ -64,15 +67,24 @@ const SearchCity: React.FC<SearchButtonProps> = ({
     <div className={`${className}`}>
       {disp === 0 ? (
         <>
-          <div className="flex gap-1 items-center">
-            <CustomSelect
-              items={cities}
-              className="px-5"
-              setItem={setSelectedCity}
-              renderItem={renderItem}
-              placeholder="Filtrar por cidade..."
-            />
-            <span className="absolute left-1">
+          <div className="flex gap-1 items-center justify-center">
+            <select
+              value={city || ""}
+              onChange={(e) => setCity(e.target.value)}
+              className={`w-48 h-9 pl-2 py-1 bg-transparent border-0 focus:ring-0 focus:outline-none font-light text-sm appearance-none ${
+                !city ? "text-slate-500" : "text-black"
+              }`}
+            >
+              <option value="" className="text-slate-500">
+                Filtrar por cidade...
+              </option>
+              {cities.map((item) => (
+                <option key={item._id} value={item._id} className="text-black">
+                  {item.city}
+                </option>
+              ))}
+            </select>
+            <span className="absolute left-2">
               <svg
                 className="w-5 h-5 text-slate-600"
                 aria-hidden="true"
@@ -117,7 +129,7 @@ const SearchCity: React.FC<SearchButtonProps> = ({
             {disp === 1 && (
               <span className="absolute left-2">
                 <svg
-                  className="w-5 h-5 text-slate-600 dark:text-white"
+                  className="w-5 h-5 text-slate-600"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -158,8 +170,8 @@ const Neighborhood: React.FC<SearchButtonProps> = ({
   const [neigh, setNeigh] = useState<string>();
   const [neighs, setNeighs] = useState<any[]>();
 
-  const setSelectedNeigh = (neigh: any) => {
-    neigh && neigh._id && setNeigh(neigh._id);
+  const setSelectedNeigh = (neigh: string) => {
+    setNeigh(neigh);
   };
 
   const renderItem = (item: any) => {
@@ -195,32 +207,39 @@ const Neighborhood: React.FC<SearchButtonProps> = ({
     <div className={`${className} relative`}>
       {disp === 0 ? (
         <>
-          <div className="flex gap-1 items-center">
-            <CustomSelect
-              items={neighs}
-              className="px-5"
-              setItem={setSelectedNeigh}
-              renderItem={renderItem}
-              placeholder="Filtrar por bairro..."
-            />
+          <div className="flex gap-1 items-center justify-center">
+            <select
+              value={neigh || ""}
+              onChange={(e) => setNeigh(e.target.value)}
+              className={`w-48 h-9 pl-2 py-1 bg-transparent border-0 focus:ring-0 focus:outline-none font-light text-sm appearance-none ${
+                !neigh ? "text-slate-500" : "text-black"
+              }`}
+            >
+              <option value="" className="!text-slate-500">
+                Filtrar por bairro...
+              </option>
+              {neighs && neighs.length > 0 ? (
+                neighs.map((item) => (
+                  <option
+                    key={item._id}
+                    value={item._id}
+                    className="!text-black"
+                  >
+                    {item.neigh}
+                  </option>
+                ))
+              ) : (
+                <option value="" disabled>
+                  Nenhum bairro disponível
+                </option>
+              )}
+            </select>
             <span className="absolute left-1">
-              <svg
+              <Image
+                src={neighicon}
+                alt="icon de bairro"
                 className="w-6 h-6 text-slate-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8.891 15.107 15.11 8.89m-5.183-.52h.01m3.089 7.254h.01M14.08 3.902a2.849 2.849 0 0 0 2.176.902 2.845 2.845 0 0 1 2.94 2.94 2.849 2.849 0 0 0 .901 2.176 2.847 2.847 0 0 1 0 4.16 2.848 2.848 0 0 0-.901 2.175 2.843 2.843 0 0 1-2.94 2.94 2.848 2.848 0 0 0-2.176.902 2.847 2.847 0 0 1-4.16 0 2.85 2.85 0 0 0-2.176-.902 2.845 2.845 0 0 1-2.94-2.94 2.848 2.848 0 0 0-.901-2.176 2.848 2.848 0 0 1 0-4.16 2.849 2.849 0 0 0 .901-2.176 2.845 2.845 0 0 1 2.941-2.94 2.849 2.849 0 0 0 2.176-.901 2.847 2.847 0 0 1 4.159 0Z"
-                />
-              </svg>
+              ></Image>
             </span>
           </div>
         </>
@@ -230,30 +249,39 @@ const Neighborhood: React.FC<SearchButtonProps> = ({
             Bairro:
           </label>
           <div className="pt-1 flex items-center relative rounded-full">
-            <CustomSelect
-              className="px-10"
-              items={neighs}
-              setItem={setSelectedNeigh}
-              renderItem={renderItem}
-            />
+            <select
+              id="neigh-select"
+              value={neigh || ""}
+              onChange={(e) => setSelectedNeigh(e.target.value)}
+              className={`w-full px-10 py-2 border rounded-md text-gray-700 focus:outline-none  appearance-none ${
+                !neigh ? "text-slate-500" : "text-black"
+              }`}
+            >
+              <option value="" className="!text-slate-500">
+                Filtrar por bairro...
+              </option>
+              {neighs && neighs.length > 0 ? (
+                neighs.map((item) => (
+                  <option
+                    key={item._id}
+                    value={item._id}
+                    className="!text-black"
+                  >
+                    {item.neigh}
+                  </option>
+                ))
+              ) : (
+                <option value="" disabled>
+                  Nenhum bairro disponível
+                </option>
+              )}
+            </select>
             <span className="absolute left-2">
-              <svg
-                className="w-6 h-6 text-slate-500 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8.891 15.107 15.11 8.89m-5.183-.52h.01m3.089 7.254h.01M14.08 3.902a2.849 2.849 0 0 0 2.176.902 2.845 2.845 0 0 1 2.94 2.94 2.849 2.849 0 0 0 .901 2.176 2.847 2.847 0 0 1 0 4.16 2.848 2.848 0 0 0-.901 2.175 2.843 2.843 0 0 1-2.94 2.94 2.848 2.848 0 0 0-2.176.902 2.847 2.847 0 0 1-4.16 0 2.85 2.85 0 0 0-2.176-.902 2.845 2.845 0 0 1-2.94-2.94 2.848 2.848 0 0 0-.901-2.176 2.848 2.848 0 0 1 0-4.16 2.849 2.849 0 0 0 .901-2.176 2.845 2.845 0 0 1 2.941-2.94 2.849 2.849 0 0 0 2.176-.901 2.847 2.847 0 0 1 4.159 0Z"
-                />
-              </svg>
+              <Image
+                src={neighicon}
+                alt="icon de bairro"
+                className="w-6 h-6 text-slate-500"
+              ></Image>
             </span>
           </div>
         </>
@@ -328,7 +356,7 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
             />
             <span className="absolute left-1">
               <svg
-                className="w-6 h-6 text-slate-500 dark:text-white"
+                className="w-6 h-6 text-slate-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -387,21 +415,23 @@ const SearchSchool: React.FC<SearchButtonProps> = ({
   );
 };
 
+type SeriesItem = {
+  _id: string;
+  series: string;
+};
+
 const SearchSeries: React.FC<SearchButtonProps> = ({
   disp,
   className,
   filters,
   setFilters,
 }) => {
-  const [sereiesList, setSeriesList] = useState<any>();
-  const [series, setSeries] = useState<string | any>("");
+  const [sereiesList, setSeriesList] = useState<SeriesItem[]>([]);
+  const [series, setSeries] = useState<string>("");
 
-  const setSelectedSeries = (series: any) => {
-    series && series._id && setSeries(series._id);
-  };
-
-  const renderItem = (item: any) => {
-    return item.series;
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedSeriesId = event.target.value;
+    setSeries(selectedSeriesId);
   };
 
   useEffect(() => {
@@ -437,31 +467,28 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
       {disp === 0 ? (
         <>
           <div className="flex gap-1 items-center justify-center">
-            <CustomSelect
-              items={sereiesList}
-              setItem={setSelectedSeries}
-              renderItem={renderItem}
-              className="px-5"
-              placeholder="Filtrar por cidade..."
-            />
+            <select
+              value={series}
+              onChange={handleSelectChange}
+              className={`w-48 h-9 pl-2 py-1 bg-transparent border-0 focus:ring-0 focus:outline-none font-light text-sm appearance-none ${
+                !series ? "text-slate-500" : "text-black"
+              }`}
+            >
+              <option value="" className="!text-slate-500">
+                Filtrar por série...
+              </option>
+              {sereiesList.map((item) => (
+                <option key={item._id} value={item._id} className="!text-black">
+                  {item.series}
+                </option>
+              ))}
+            </select>
             <span className="absolute left-1">
-              <svg
+              <Image
+                src={seriesicon}
+                alt="icon series"
                 className="w-6 h-6 text-slate-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="square"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
+              ></Image>
             </span>
             <span className="absolute right-1 bg-orange-500 rounded-full p-[7px]">
               <svg
@@ -490,34 +517,31 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
               Series:
             </label>
           )}
-          <div
-            className={`flex pt-1 items-center relative rounded-full border`}
-          >
-            <CustomSelect
-              className="px-10"
-              items={sereiesList}
-              setItem={setSelectedSeries}
-              renderItem={renderItem}
-            />
+          <div className={`pt-1 flex items-center relative rounded-full`}>
+            <select
+              id="series-select"
+              value={series}
+              onChange={handleSelectChange}
+              className={`w-full px-10 py-2 border rounded-md text-gray-700 focus:outline-none  appearance-none ${
+                !series ? "text-slate-500" : "text-black"
+              }`}
+            >
+              <option value="" className="!text-slate-500">
+                Filtre pela série...
+              </option>
+              {sereiesList.map((item) => (
+                <option key={item._id} value={item._id} className="!text-black">
+                  {item.series}
+                </option>
+              ))}
+            </select>
             {disp === 1 && (
               <span className="absolute left-2">
-                <svg
-                  className="w-6 h-6 text-slate-500 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="square"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
+                <Image
+                  src={seriesicon}
+                  alt="icon series"
+                  className="w-6 h-6 text-slate-500"
+                ></Image>
               </span>
             )}
           </div>
@@ -527,22 +551,19 @@ const SearchSeries: React.FC<SearchButtonProps> = ({
   );
 };
 
+interface Level {
+  _id: string;
+  level: string;
+}
+
 const TeachingState: React.FC<SearchButtonProps> = ({
   className,
   filters,
   setFilters,
 }) => {
-  const [levels, setLevels] = useState<string[]>([]);
-  const [level, setLevel] = useState<string | any>();
+  const [levels, setLevels] = useState<Level[]>([]);
+  const [level, setLevel] = useState<string>("");
   const [showValue, setShowValue] = useState<boolean>(false);
-
-  const setselectedLevel = (level: any) => {
-    level && level._id && setLevel(level._id);
-  };
-
-  const renderItem = (item: any) => {
-    return item.level;
-  };
 
   useEffect(() => {
     const fetchLevels = async () => {
@@ -563,7 +584,7 @@ const TeachingState: React.FC<SearchButtonProps> = ({
   }, []);
 
   useEffect(() => {
-    setFilters({ ...filters, level: level });
+    setFilters({ ...filters, level });
   }, [level]);
 
   return (
@@ -572,15 +593,30 @@ const TeachingState: React.FC<SearchButtonProps> = ({
         Etapa de ensino:
       </label>
       <div className="flex pt-1 items-center relative rounded-full">
-        <CustomSelect
-          items={levels}
-          setItem={setselectedLevel}
-          className="px-5"
-          renderItem={renderItem}
-        />
+        <select
+          id="level-select"
+          value={level}
+          onChange={(e) => setLevel(e.target.value)}
+          className={`w-full px-10 py-2 border rounded-md text-gray-700 focus:outline-none appearance-none ${
+            !level ? "text-slate-500" : "text-black"
+          }`}
+        >
+          <option value="">Filtrar por ensino...</option>
+          {levels.length > 0 ? (
+            levels.map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.level}
+              </option>
+            ))
+          ) : (
+            <option value="" disabled>
+              Nenhuma etapa disponível
+            </option>
+          )}
+        </select>
         <span className="absolute left-2">
           <svg
-            className="w-6 h-6 text-slate-500 dark:text-white"
+            className="w-6 h-6 text-slate-500"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -618,9 +654,9 @@ const SearchRadius: React.FC<SearchButtonProps> = ({
       {disp === 1 ? (
         <>
           <label htmlFor="" className="font-semibold text-sm">
-            Search radius
+            Raio de busca
           </label>
-          <p>Up to {radiusValue} km</p>
+          <p>Até {radiusValue} km</p>
           <input
             type="range"
             onChange={(e) => {

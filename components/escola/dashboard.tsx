@@ -164,7 +164,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
               schools.map((result: any, index: number) => (
                 <div
                   key={index}
-                  className="bg-white max-w-sm p-4 border border-gray-200 rounded-lg"
+                  className="bg-white max-w-sm max-h-[31rem] p-4 border border-gray-200 rounded-lg"
                 >
                   <SearchResultCard
                     key={index}
