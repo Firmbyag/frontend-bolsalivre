@@ -12,7 +12,7 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ param }) => {
   const [switchMap, setSwitchMap] = useState<boolean>(false);
-  const [searchParam, setSearchParam] = useState<any>();
+  const [searchParam, setSearchParam] = useState<any>({});
   const [schools, setSchools] = useState<any>(null);
 
   // const [timer, setTimer] = useState<boolean>(false);
@@ -22,33 +22,25 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
   useEffect(() => {
     try {
       if (param && typeof param === "string") {
-        setSearchParam({
-          ...searchParam,
-          ...JSON.parse(param),
-        });
+        const parsedParam = JSON.parse(param);
+        setSearchParam((prevParam: any) => ({
+          ...prevParam,
+          ...parsedParam,
+        }));
       } else {
         console.warn("Param is undefined or not a valid JSON string");
       }
     } catch (error) {
       console.error("Error parsing param:", error);
     }
-  }, []);
+  }, [param]);
 
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/schools";
-
     const fetchSchools = async (searchParams: any) => {
       try {
-        // const result = await fetch(url, requestOptions);
-        const result = await axios.get(url, {
-          params: searchParams,
-        });
-        if (!result) {
-          throw new Error(`HTTP error! Status: ${result.status}`);
-        }
-        const data = await result.data;
-
-        setSchools(data);
+        const url = process.env.NEXT_PUBLIC_BACKEND_DEV + "/api/schools";
+        const result = await axios.get(url, { params: searchParams });
+        setSchools(result.data);
       } catch (error) {
         console.error("Error fetching schools:", error);
       }
@@ -59,7 +51,9 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      fetchSchools(searchParam);
+      if (searchParam) {
+        fetchSchools(searchParam);
+      }
     }, 1000);
 
     return () => {
@@ -161,29 +155,37 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
               </div>
             )}
             {schools &&
-              schools.map((result: any, index: number) => (
-                <div
-                  key={index}
-                  className="bg-white max-w-sm max-h-[31rem] p-4 border border-gray-200 rounded-lg"
-                >
-                  <SearchResultCard
+              schools
+                .filter((result: any) => {
+                  console.log("Filtro aplicado:", searchParam.level);
+                  console.log("Comparando com:", result.level._id);
+                  return searchParam.level
+                    ? result.level._id === searchParam.level
+                    : true;
+                })
+                .map((result: any, index: number) => (
+                  <div
                     key={index}
-                    mark={result.mark}
-                    title={result.title}
-                    star={result.star}
-                    city={result.city.city}
-                    neigh={result.neigh.neigh}
-                    period={result.period}
-                    schoolYear={result.years}
-                    turno={result.turno}
-                    level={result.level.level}
-                    originUnit={result.originUnit}
-                    originPrice={result.originPrice}
-                    presentUnit={result.presentUnit}
-                    presentPrice={result.presentPrice}
-                  />
-                </div>
-              ))}
+                    className="bg-white max-w-sm max-h-[31rem] p-4 border border-gray-200 rounded-lg"
+                  >
+                    <SearchResultCard
+                      key={index}
+                      mark={result.mark}
+                      title={result.title}
+                      star={result.star}
+                      city={result.city.city}
+                      neigh={result.neigh.neigh}
+                      period={result.period}
+                      schoolYear={result.years}
+                      turno={result.turno}
+                      level={result.level.level}
+                      originUnit={result.originUnit}
+                      originPrice={result.originPrice}
+                      presentUnit={result.presentUnit}
+                      presentPrice={result.presentPrice}
+                    />
+                  </div>
+                ))}
           </div>
         </div>
       )}

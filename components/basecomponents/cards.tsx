@@ -210,34 +210,44 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({
   presentUnit,
   presentPrice,
 }) => {
-  const turnoArray: any = [];
-  const schoolYearArray: any = [];
-  const turnolength = turno.length;
-  const yearlength = schoolYear.length;
-  for (let i = 0; i < turnolength; i++) {
-    const element = turno[i];
-    turnoArray.push(
-      <button
-        key={i}
-        type="button"
-        className="text-purple-700 border rounded-full border-purple-700 hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium text-sm px-4 py-1 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
-      >
-        {element}
-      </button>
-    );
-  }
-  for (let i = 0; i < yearlength; i++) {
-    const element = schoolYear[i];
-    schoolYearArray.push(
-      <button
-        key={i}
-        type="button"
-        className="text-purple-700 border rounded-full border-purple-700 hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium text-sm px-3 py-1 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
-      >
-        {element}
-      </button>
-    );
-  }
+  const [selectedTurno, setSelectedTurno] = useState<string | null>(null);
+  const [selectedSchoolYear, setSelectedSchoolYear] = useState<string | null>(
+    null
+  );
+
+  const handleTurnoClick = (turno: string) => {
+    setSelectedTurno(turno);
+  };
+
+  const handleSchoolYearClick = (year: string) => {
+    setSelectedSchoolYear(year);
+  };
+
+  const turnoArray = turno.map((element: string, index: number) => (
+    <button
+      key={index}
+      type="button"
+      className={`text-purple-700 border rounded-full border-purple-700 focus:outline-none font-medium text-sm px-4 py-1 text-center me-2 mb-2 dark:border-purple-400 ${
+        selectedTurno === element ? "bg-purple-500 text-white" : ""
+      }`}
+      onClick={() => handleTurnoClick(element)}
+    >
+      {element}
+    </button>
+  ));
+  const schoolYearArray = schoolYear.map((element: string, index: number) => (
+    <button
+      key={index}
+      type="button"
+      className={`text-purple-700 border rounded-full border-purple-700 focus:outline-none font-medium text-sm px-3 py-1 text-center me-2 mb-2 dark:border-purple-400 ${
+        selectedSchoolYear === element ? "bg-purple-500 text-white" : ""
+      }`}
+      onClick={() => handleSchoolYearClick(element)}
+    >
+      {element}
+    </button>
+  ));
+
   return (
     <div className="flex flex-col bg-white rounded-lg justify-between items-between gap-5">
       <div className="flex gap-5 items-center">
