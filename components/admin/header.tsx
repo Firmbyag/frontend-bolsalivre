@@ -165,7 +165,7 @@ const Header: React.FC<CommunicateProps> = ({ activeTab }) => {
         {/* Drawer Menu */}
         <div
           className={`fixed top-0 left-0 h-full w-full justify-center bg-slate-200 z-50 transform transition-transform duration-300 ${
-            isOpen ? "translate-y-[40px]" : "-translate-y-full"
+            isOpen ? "translate-y-0" : "-translate-y-full"
           }`}
         >
           <ul className="flex flex-col items-center space-y-5 p-4">
@@ -201,6 +201,7 @@ const Header: React.FC<CommunicateProps> = ({ activeTab }) => {
                 <span>Meus Alunos</span>
               </Link>
             </li>
+            {/* 
             <li className="">
               <Link
                 href={`/admin/${encodeURIComponent("Servios")}`}
@@ -208,7 +209,7 @@ const Header: React.FC<CommunicateProps> = ({ activeTab }) => {
               >
                 <span>Servios</span>
               </Link>
-            </li>
+            </li>*/}
             <li className="">
               <div className="flex justify-between items-center text-sm border rounded-lg p-1 border-gray-500 text-gray-500 space-x-1">
                 <svg
@@ -253,6 +254,29 @@ const Header: React.FC<CommunicateProps> = ({ activeTab }) => {
                   </div>
                 )}
               </div>
+            </li>
+            <li>
+              <button
+                className="bg-gray-400 rounded-full p-1 text-white"
+                onClick={() => setIsOpen(false)}
+              >
+                {" "}
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {" "}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />{" "}
+                </svg>{" "}
+              </button>
             </li>
           </ul>
         </div>
