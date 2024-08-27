@@ -55,23 +55,11 @@ const SearchList: React.FC<SearchListProps> = ({ menu, setMenu }) => {
               className="self-end cursor-pointer"
               onClick={() => setMenu(0)}
             >
-              <svg
-                className="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18 17.94 6M18 18 6.06 6"
-                />
-              </svg>
+              <IoCloseCircle
+                size={28}
+                color="#1F2937 
+"
+              />
             </span>
             <p className="text-xl font-bold">Buscar por uma escola:</p>
 
@@ -113,14 +101,17 @@ const SearchList: React.FC<SearchListProps> = ({ menu, setMenu }) => {
           menu === 1 ? "flex" : "hidden"
         } flex-col p-10 px-[1px] py-2 pb-10 z-50`}
       >
-        <div className="flex justify-between text-gray-700 items-center pr-2">
+        <div className="flex justify-center text-gray-700 items-center pr-2">
           <Image
             src={Logo}
             alt="this is logo"
-            className="w-[57%] h-auto filter drop-shadow-sm shadow-black"
+            className="w-[53%] h-auto filter drop-shadow-sm shadow-black"
           />
-          <span className="cursor-pointer" onClick={() => setMenu(0)}>
-            <IoCloseCircle size={38} color="white" />
+          <span
+            className="absolute top-[85%] cursor-pointer"
+            onClick={() => setMenu(0)}
+          >
+            <IoCloseCircle size={58} color="white" />
           </span>
         </div>
         {/* Additional menu content can be added here */}

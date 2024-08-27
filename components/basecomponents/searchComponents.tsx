@@ -116,7 +116,7 @@ const SearchCity: React.FC<SearchButtonProps> = ({
         <>
           {disp === 1 && (
             <label htmlFor="" className="font-semibold text-lg">
-              City:
+              Cidade:
             </label>
           )}
           <div className="flex items-center relative rounded-full border">
@@ -676,6 +676,12 @@ const SearchRadius: React.FC<SearchButtonProps> = ({
   );
 };
 
+interface ApiDataItem {
+  _id: string;
+  year?: string;
+  turno?: string;
+}
+
 const SearchChecked: React.FC<SearchButtonProps> = ({
   disp,
   className,
@@ -684,7 +690,7 @@ const SearchChecked: React.FC<SearchButtonProps> = ({
   setFilters,
 }) => {
   const [selectedData, setSelectedData] = useState<string[]>([]);
-  const [dataList, setDataList] = useState<any>([]);
+  const [dataList, setDataList] = useState<ApiDataItem[]>([]);
   const checkedDisp: JSX.Element[] = [];
 
   const handleFilters = (
@@ -725,8 +731,17 @@ const SearchChecked: React.FC<SearchButtonProps> = ({
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
-        const data = await res.json();
-        setDataList(data);
+        const data: ApiDataItem[] = await res.json();
+
+        if (disp === 1) {
+          setDataList(data);
+        } else if (disp === 2) {
+          setDataList(
+            data.map((item) => ({ _id: item._id, turno: item.turno }))
+          );
+        } else {
+          setDataList(data);
+        }
       } catch (err) {
         console.error("Error: Level loading error!!!");
       }
@@ -738,47 +753,48 @@ const SearchChecked: React.FC<SearchButtonProps> = ({
   for (let i = 0; i < length; i++) {
     const element = dataList[i];
 
-    if (disp === 1 || disp === 2)
+    if (disp === 1 || disp === 2) {
+      const valueToDisplay = disp === 1 ? element.year : element.turno;
       checkedDisp.push(
         <div key={i} className="flex items-center mb-4">
           <input
             id={`default-checkbox${i}-${disp - 1}`}
             type="checkbox"
-            value={element._id}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            value={valueToDisplay}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
             onChange={(e) =>
               handleFilters(e.target.value, selectedData, setSelectedData)
             }
           />
           <label
             htmlFor={`default-checkbox${i}-${disp - 1}`}
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className="ms-2 text-sm font-medium text-gray-700"
           >
-            {element.year || element.turno}
+            {valueToDisplay}
           </label>
         </div>
       );
-    else if (disp === 3) {
+    } else if (disp === 3) {
       checkedDisp.push(
         <div key={disp} className="flex items-center mb-4">
           <input
             id={`default-checkbox${i}-${disp - 1}`}
             type="checkbox"
-            value={element}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            value={element._id}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
             onChange={(e) =>
               handleFilters(e.target.value, selectedData, setSelectedData)
             }
           />
           <label
             htmlFor={`default-checkbox${i}-${disp - 1}`}
-            className="flex justify-between ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className="flex justify-between ms-2 text-sm font-medium text-gray-900"
           >
-            {element}
+            {element._id}
           </label>
           <a className="pl-3 flex text-purple-700 hover:bg-purple-50">
             <svg
-              className="w-[24px] h-[24px] text-gray-800 dark:text-white"
+              className="w-[24px] h-[24px] text-gray-800"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="1em"
@@ -801,9 +817,9 @@ const SearchChecked: React.FC<SearchButtonProps> = ({
   }
 
   return (
-    <div className={`${className} relative`} key={checkedLabel}>
-      <label className="font-semibold text-sm">{checkedLabel}</label>
-      {checkedDisp}
+    <div className={`${className} flex flex-col relative`} key={checkedLabel}>
+      <label className="font-semibold text-sm mb-2">{checkedLabel}</label>
+      <div className="grid grid-cols-2 ">{checkedDisp}</div>
     </div>
   );
 };

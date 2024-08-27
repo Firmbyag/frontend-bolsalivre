@@ -33,7 +33,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
         <div
           className={`flex ${
             loginStatus ? "pt-3" : "justify-center"
-          } gap-2 items-center`}
+          } gap-2 items-center `}
         >
           <Link href="https://wa.me/21974734057">
             <span>
@@ -97,9 +97,10 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
       <div
         className={`${
           menu === 1 ? "flex" : "hidden"
-        } p-10 flex-col justify-between gap-2`}
+        } p-10 flex-col items-center justify-between gap-2`}
       >
         <div className="flex flex-col justify-start">
+          <span className="text-white">Entre em contato conosco</span>
           <button className="flex gap-5 py-3 justify-start items-center border-purple-400">
             <span className="bg-purple-700 rounded-full p-2">
               <svg
@@ -114,12 +115,16 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
                 />
               </svg>
             </span>
-            <span className="text-orange-600">(21) 2143-9986</span>
+            <div className="flex flex-col gap-1">
+              <span className="text-[#F2882B]">Ligue para:</span>
+              <span className="text-white">(21) 92143-9986</span>
+            </div>
           </button>
+          <span className="text-center text-white text-opacity-[.5]">Ou</span>
           <button className="flex gap-5 py-3 justify-start items-center border-purple-400">
             <span className="">
               <svg
-                className="w-10 h-10 tex-xl text-green-500 dark:text-white"
+                className="w-10 h-10 tex-xl text-white "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -140,8 +145,8 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
               </svg>
             </span>
             <div className="flex flex-col gap-1">
-              <span>Fale conosco por:</span>
-              <a href="#" className="text-orange-500">
+              <span className="text-[#F2882B]">Fale conosco por:</span>
+              <a href="#" className="text-white">
                 WhatsApp
               </a>
             </div>
@@ -178,7 +183,7 @@ const Communicate: React.FC<CommunicateProps> = ({ menu, setMenu }) => {
           </button>
         ) : (
           <button
-            className="sm:mx-16 py-2 sm:px-10 text-xl rounded-full bg-orange-50 hover:bg-orange-100 border border-purple-400"
+            className="w-[50%] h-[50%] sm:mx-16 py-2 sm:px-10 text-xl rounded-full bg-orange-50 hover:bg-orange-100 border border-purple-400"
             onClick={() => {
               setToEnter(!toenter);
               setMenu(0);

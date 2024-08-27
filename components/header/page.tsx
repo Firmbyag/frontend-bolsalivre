@@ -16,11 +16,11 @@ const Header = () => {
   const SHOW_COMMUNICATE = 2;
 
   return (
-    <div className="flex flex-col items-center lg:p-4 p-2 gap-4 bg-purple-700">
+    <div className="flex flex-col items-center lg:p-4 p-2 gap-4 bg-purple-700 relative">
       <div
         className={`flex ${
           menu === SHOW_SEARCH
-            ? "flex-col fixed top-0 left-0 w-full h-full bg-purple-600 lg:w-[85%] z-20"
+            ? "flex-col fixed top-0 left-0 w-full h-[75%] border border-none rounded-bl-[35px] rounded-br-[35px] bg-purple-600 lg:w-[85%] z-20"
             : "space-y-1 lg:gap-5"
         }`}
       >
@@ -31,7 +31,7 @@ const Header = () => {
               menu === SHOW_SEARCH ? "hidden" : "flex"
             }`}
           >
-            <div className="flex justify-between ">
+            <div className="flex justify-between">
               <a href="/">
                 <Image
                   src={Logo}
@@ -87,6 +87,13 @@ const Header = () => {
           <Communicate menu={menu} setMenu={setMenu} />
         </div>
       </div>
+
+      {menu !== SHOW_NONE && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-10"
+          onClick={() => setMenu(SHOW_NONE)}
+        ></div>
+      )}
     </div>
   );
 };

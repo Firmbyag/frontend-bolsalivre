@@ -14,6 +14,8 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
   const [switchMap, setSwitchMap] = useState<boolean>(false);
   const [searchParam, setSearchParam] = useState<any>({});
   const [schools, setSchools] = useState<any>(null);
+  const [anos, setAnos] = useState<any[]>([]);
+  const [turnos, setTurnos] = useState<any[]>([]);
 
   // const [timer, setTimer] = useState<boolean>(false);
 
@@ -80,7 +82,7 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
           <div className="flex items-center relative text-gray-700 text-sm w-full sm:w-auto">
             <select
               name="order"
-              className="rounded-full px-8 py-2 border border-slate-300 focus:ring-2 ring-purple-600 focus:outline-purple-600 w-full sm:w-auto"
+              className="rounded-full px-8 py-2 border border-slate-300  focus:outline-none  w-full sm:w-auto"
             >
               <option value={0}>Relevance</option>
               <option value={1}>Lowest Price</option>
@@ -157,11 +159,24 @@ const Dashboard: React.FC<DashboardProps> = ({ param }) => {
             {schools &&
               schools
                 .filter((result: any) => {
-                  console.log("Filtro aplicado:", searchParam.level);
-                  console.log("Comparando com:", result.level._id);
-                  return searchParam.level
+                  const matchLevel = searchParam.level
                     ? result.level._id === searchParam.level
                     : true;
+                  const matchYear =
+                    searchParam.years && searchParam.years.length > 0
+                      ? result.years.some((year: string) =>
+                          searchParam.years.includes(year.trim())
+                        )
+                      : true;
+
+                  const matchTurno =
+                    searchParam.shift && searchParam.shift.length > 0
+                      ? result.turno.some((turno: string) =>
+                          searchParam.shift.includes(turno.trim())
+                        )
+                      : true;
+
+                  return matchLevel && matchYear && matchTurno;
                 })
                 .map((result: any, index: number) => (
                   <div
